@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="global_margin">24dp</dimen>
+    <dimen name="global_icon_size">150dp</dimen>
+    <dimen name="global_top_distance">0dp</dimen>
+    <dimen name="global_side_distance">0dp</dimen>
+    <dimen name="button_corner_radius">25dp</dimen>
+    <dimen name="button_width">144dp</dimen>
+    <dimen name="button_height">55dp</dimen>
+    <dimen name="mailButtonSize">50dp</dimen>
+</resources>

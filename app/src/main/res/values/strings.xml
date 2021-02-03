@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">SecuroServ</string>
+    <string name="app_name">Securo Serv</string>
+
+    //Splash screen
+    <string name="appLogo">App Logo</string>
+
+    //Login screen
+    <string name="mail">E-mail:</string>
+    <string name="password">Password:</string>
+    <string name="loginButton">Sign In</string>
+    <string name="registrationButton">Sign Up</string>
+    <string name="changePasswordButton">Change Password</string>
+
+    //Change password screen
+    <string name="hintTextView">After filling the box bellow and pressing the SUBMIT button, you are
+        going to receive an e-mail with a link inside. You have to open the link and write your new
+        password inside the box.</string>
+    <string name="submitButton">Submit</string>
+    <string name="mailButton">Mail button</string>
+
 </resources>

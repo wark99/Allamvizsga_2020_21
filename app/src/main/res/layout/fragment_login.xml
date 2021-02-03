@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginFragment">
+
+    <ImageView
+        android:id="@+id/appLogo"
+        android:layout_width="@dimen/global_icon_size"
+        android:layout_height="@dimen/global_icon_size"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:contentDescription="@string/appLogo"
+        android:src="@mipmap/app_icon"
+        app:layout_constraintBottom_toTopOf="@+id/ErrorOutputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ErrorOutputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/MailInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appLogo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ErrorOutputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/error_message" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/MailInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        app:layout_constraintBottom_toTopOf="@+id/PasswordInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ErrorOutputLayout">
+
+        <EditText
+            android:id="@+id/MailInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/mail"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/PasswordInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        app:layout_constraintBottom_toTopOf="@+id/LoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MailInputLayout">
+
+        <EditText
+            android:id="@+id/editTextTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:hapticFeedbackEnabled="false"
+        android:text="@string/loginButton"
+        android:textAlignment="center"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/RegistrationButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordInputLayout" />
+
+    <Button
+        android:id="@+id/RegistrationButton"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:hapticFeedbackEnabled="false"
+        android:text="@string/registrationButton"
+        android:textAlignment="center"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toTopOf="@+id/ChangePasswordButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
+
+    <Button
+        android:id="@+id/ChangePasswordButton"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="@dimen/button_height"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:background="@color/transparent_background"
+        android:backgroundTint="@color/transparent_background"
+        android:hapticFeedbackEnabled="true"
+        android:text="@string/changePasswordButton"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        app:cornerRadius="@dimen/button_corner_radius"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/RegistrationButton" />
+</androidx.constraintlayout.widget.ConstraintLayout>
