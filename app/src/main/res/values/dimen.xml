@@ -4,8 +4,14 @@
     <dimen name="global_icon_size">150dp</dimen>
     <dimen name="global_top_distance">0dp</dimen>
     <dimen name="global_side_distance">0dp</dimen>
+    <dimen name="global_bottom_distance">0dp</dimen>
     <dimen name="button_corner_radius">25dp</dimen>
     <dimen name="button_width">144dp</dimen>
     <dimen name="button_height">55dp</dimen>
     <dimen name="mailButtonSize">50dp</dimen>
+    <dimen name="registration_screen_icon_size">100dp</dimen>
+    <dimen name="menu_icon_size">125dp</dimen>
+    <dimen name="menu_text_size">18sp</dimen>
+    <dimen name="menu_top_distance">96dp</dimen>
+    <dimen name="splash_top_distance">96dp</dimen>
 </resources>

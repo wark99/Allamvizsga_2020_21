@@ -12,9 +12,9 @@
         android:layout_width="@dimen/global_icon_size"
         android:layout_height="@dimen/global_icon_size"
         android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginTop="@dimen/splash_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/splash_top_distance"
         android:contentDescription="@string/appLogo"
         android:rotationX="0"
         android:rotationY="0"
@@ -27,14 +27,30 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/global_icon_size"
+        android:layout_height="@dimen/global_icon_size"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/splash_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_bottom_distance"
+        app:layout_constraintBottom_toTopOf="@+id/LoadingTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+
+    <TextView
+        android:id="@+id/LoadingTextView"
+        android:layout_width="@dimen/global_icon_size"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/loading"
+        android:textAlignment="center"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/menu_text_size"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,15 +11,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_password)
-    }
-
-    override fun onSuccess() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onFail() {
-        TODO("Not yet implemented")
+        setContentView(R.layout.fragment_main)
     }
 
     override fun showLoading() {

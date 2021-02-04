@@ -6,11 +6,9 @@ import com.example.allamvizsga_2020_21.mvp.BaseView
 interface MainContract {
 
     interface View : BaseView {
-        fun onSuccess()
-        fun onFail()
     }
 
-    abstract class Presenter(view: View) : BasePresenter<MainContract.View>(view){
+    abstract class Presenter(view: View) : BasePresenter<View>(view) {
 
     }
 }
