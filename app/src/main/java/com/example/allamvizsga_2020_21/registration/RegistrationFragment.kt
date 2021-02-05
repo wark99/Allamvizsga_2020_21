@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.allamvizsga_2020_21.R
+
 
 class RegistrationFragment : Fragment() {
 
@@ -26,6 +28,7 @@ class RegistrationFragment : Fragment() {
         super.onResume()
 
         val currentActivity = requireActivity()
+        currentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
 
         termsButton = currentActivity.findViewById(R.id.TermsButton)
         signUpButton = currentActivity.findViewById(R.id.RegistrationButton)
