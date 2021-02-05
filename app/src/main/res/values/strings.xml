@@ -1,3 +1,49 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">SecuroServ</string>
+
+    //Splash screen
+    <string name="appLogo">App Logo</string>
+    <string name="loading">Loading…</string>
+
+    //Login screen
+    <string name="mail">E-mail:</string>
+    <string name="password">Password:</string>
+    <string name="loginButton">Sign In</string>
+    <string name="registrationButton">Sign Up</string>
+    <string name="changePasswordButton">Change Password</string>
+
+    //Change password screen
+    <string name="hintTextView">After filling the box bellow and pressing the SUBMIT button, you are
+        going to receive an e-mail with a link inside. You have to open the link and write your new
+        password inside the box.</string>
+    <string name="submitButton">Submit</string>
+    <string name="mailButton">Mail button</string>
+
+    //Registration screen
+    <string name="username">Username (Min 4 character):</string>
+    <string name="email">E-mail address (Real):</string>
+    <string name="password_registration">Password (Min 6 character):</string>
+    <string name="password_again">Password (Same as before):</string>
+    <string name="terms">User agreement</string>
+
+    //User agreement screen
+    <string name="terms_text" tools:ignore="Typos">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet turpis auctor, tempor lacus ut, vulputate risus. Mauris gravida nisl elit, nec eleifend dolor pharetra et. Duis vitae tortor accumsan, efficitur massa id, vestibulum enim. Etiam quis nisi sed nibh volutpat iaculis eu vitae mauris. Aenean interdum arcu sed lacus pellentesque, at tempus orci mattis. Nunc sagittis ante lacus. Phasellus nec consectetur erat. Cras libero eros, cursus quis rutrum quis, lacinia et neque. In posuere augue ut quam suscipit suscipit. Mauris quis arcu quis erat pellentesque luctus. Donec massa diam, molestie nec faucibus in, tincidunt eu orci. Phasellus id tempus neque. Donec id nisi nibh. Pellentesque consequat a nibh et placerat. Mauris aliquet odio ante, ac fringilla diam posuere et.
+
+Cras placerat purus diam, non lobortis arcu sodales vel. Morbi in sapien at enim vestibulum tristique ac imperdiet diam. Nullam iaculis risus eget erat tempor, in consectetur nibh ullamcorper. Phasellus enim quam, dapibus vitae velit ut, pellentesque sodales felis. Mauris non augue auctor, dapibus justo nec, vehicula libero. Phasellus et ornare purus. Vivamus mattis velit metus, a aliquam nibh dapibus ut. Morbi finibus turpis ut neque viverra, at tincidunt libero ultrices. Praesent sodales bibendum mattis. Donec feugiat lacinia arcu. Nullam sit amet laoreet mi, ut facilisis nisi. Mauris porttitor cursus elit, et viverra dui volutpat viverra. Morbi consequat, mi id pharetra bibendum, dolor ipsum sagittis ex, at sodales lectus odio ut ligula. Vestibulum et dui quis dolor porttitor tempor. In accumsan nec purus at feugiat.
+
+Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris sed placerat ipsum, vitae mattis purus. Nulla at neque eros. Donec a ornare enim. Curabitur tempus urna diam. Donec posuere lectus sit amet libero auctor, eget commodo orci hendrerit. Nam tempor pulvinar orci. Duis egestas, dui non suscipit mollis, nulla libero accumsan risus, at viverra nulla massa et orci.
+
+Integer nec malesuada justo. Nam faucibus tortor vehicula odio imperdiet pulvinar. Praesent dictum sed erat quis tincidunt. Sed tristique sagittis tellus, suscipit congue tellus congue vitae. Suspendisse potenti. Curabitur ut risus varius, posuere ligula in, varius tortor. Integer semper vulputate vulputate. Donec et efficitur erat, in ultrices neque. Maecenas fringilla tortor id lorem rhoncus, eget facilisis dolor venenatis. Nulla faucibus ut nisi quis dignissim. Nullam in pulvinar erat. Donec pulvinar finibus ante. Etiam quam velit, sodales at facilisis eu, tristique nec lectus.
+
+Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec pretium justo auctor in. Sed metus justo, tristique non fermentum non, dignissim non nibh. Ut sagittis sem dolor, ac tempus ante mattis in. Curabitur sit amet pharetra justo. Quisque eu massa aliquet, ultricies leo nec, pellentesque elit. Aenean ex metus, rhoncus nec nulla ut, rhoncus pharetra leo. Phasellus suscipit nulla venenatis, sodales ante vel, bibendum dui. Morbi tempus faucibus mauris vel lacinia. Sed et urna egestas, pellentesque lacus sit amet, accumsan diam. Curabitur libero nunc, pretium non imperdiet at, faucibus eu risus. Nulla commodo leo nibh, ut posuere diam mollis sed. Vivamus cursus lectus sed nisl egestas, ac lacinia dui vehicula. Integer eleifend eros accumsan odio interdum congue. Mauris eu tristique elit.</string>
+
+    //Main screen
+    <string name="camera_button">Cameras</string>
+    <string name="camera_title">Cameras</string>
+    <string name="history_button">History</string>
+    <string name="history_title">History</string>
+    <string name="profile_button">Profile</string>
+    <string name="profile_title">Profile</string>
+    <string name="exit_button">Log Out</string>
+    <string name="exit_title">Log Out</string>
 </resources>
