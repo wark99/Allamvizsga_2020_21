@@ -41,6 +41,7 @@ class PasswordFragment : Fragment() {
         mailsFloatingActionButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_MAIN)
             intent.addCategory(Intent.CATEGORY_APP_EMAIL)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
 
             //TODO: When to redirect the user?
