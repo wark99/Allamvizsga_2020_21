@@ -11,7 +11,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_main)
+        setContentView(R.layout.activity_main)
     }
 
     override fun showLoading() {
