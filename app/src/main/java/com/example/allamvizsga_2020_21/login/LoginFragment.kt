@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.allamvizsga_2020_21.Firebase.DataSnapshotListener
+import com.example.allamvizsga_2020_21.Firebase.Listeners.DataSnapshotListener
 import com.example.allamvizsga_2020_21.Firebase.FirebaseWriteRead
 import com.example.allamvizsga_2020_21.R
 import com.google.firebase.database.DataSnapshot

@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.allamvizsga_2020_21.Firebase.FirebaseWriteRead
-import com.example.allamvizsga_2020_21.Firebase.SuccessListener
+import com.example.allamvizsga_2020_21.Firebase.Listeners.SuccessListener
 import com.example.allamvizsga_2020_21.R
 
 class SplashFragment : Fragment() {

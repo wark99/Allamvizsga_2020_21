@@ -1,5 +1,7 @@
 package com.example.allamvizsga_2020_21.Firebase
 
+import com.example.allamvizsga_2020_21.Firebase.Listeners.LogInListener
+import com.example.allamvizsga_2020_21.Firebase.Listeners.SuccessListener
 import com.google.firebase.auth.FirebaseAuth
 
 class FirebaseAccountManager {
