@@ -9,8 +9,8 @@ class FirebaseAccountManager {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var authStateListener: FirebaseAuth.AuthStateListener
 
-    fun signIn(email: String, password: String, successListener: SuccessListener) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
+    fun signUp(email: String, password: String, successListener: SuccessListener) {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
             successListener.onSuccess()
         }.addOnFailureListener(successListener::onFail)
     }

@@ -16,47 +16,39 @@
         android:layout_marginBottom="@dimen/global_margin"
         android:contentDescription="@string/appLogo"
         android:src="@mipmap/app_icon"
-        app:layout_constraintBottom_toTopOf="@+id/ErrorOutputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/LoginErrorOutputTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ErrorOutputLayout"
+    <TextView
+        android:id="@+id/LoginErrorOutputTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
         android:layout_marginBottom="@dimen/global_margin"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/MailInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/LoginMailInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appLogo">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ErrorOutputEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textColor="@color/error_message" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/appLogo" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/MailInputLayout"
+        android:id="@+id/LoginMailInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
         android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordInputLayout"
+        app:layout_constraintBottom_toTopOf="@+id/LoginPasswordInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ErrorOutputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/LoginErrorOutputTextView">
 
         <EditText
-            android:id="@+id/MailInputEditText"
+            android:id="@+id/LoginMailInputEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -67,7 +59,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PasswordInputLayout"
+        android:id="@+id/LoginPasswordInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/global_margin"
@@ -77,10 +69,10 @@
         app:layout_constraintBottom_toTopOf="@+id/LoginButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MailInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/LoginMailInputLayout">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/LoginPasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -105,7 +97,7 @@
         app:layout_constraintBottom_toTopOf="@+id/SignUpButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginPasswordInputLayout" />
 
     <Button
         android:id="@+id/SignUpButton"
