@@ -22,7 +22,6 @@ class SplashFragment : Fragment() {
         super.onResume()
 
         val navController = findNavController()
-
         navController.navigate(R.id.to_login_form_splash)
     }
 }
