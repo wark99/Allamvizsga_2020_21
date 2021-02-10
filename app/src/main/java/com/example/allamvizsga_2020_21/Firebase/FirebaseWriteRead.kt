@@ -5,17 +5,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class FirebaseWriteRead {
+object FirebaseWriteRead {
 
-    private var instance: FirebaseWriteRead? = null
     private val databaseReference = FirebaseDatabase.getInstance().reference
-
-    fun getInstance(): FirebaseWriteRead? {
-        if (instance == null) {
-            instance = FirebaseWriteRead()
-        }
-        return instance
-    }
 
     fun writeToDatabase(path: String, structure: Any, successListener: SuccessListener) {
         databaseReference.child(path).setValue(structure).addOnSuccessListener {

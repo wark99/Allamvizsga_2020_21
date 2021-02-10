@@ -20,7 +20,7 @@ class LoginFragment : Fragment() {
     private lateinit var signUpButton: Button
     private lateinit var changePasswordButton: Button
 
-    private val firebase = FirebaseWriteRead().getInstance()!!
+    private val firebase = FirebaseWriteRead
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

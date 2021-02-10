@@ -11,9 +11,9 @@ import com.example.allamvizsga_2020_21.Firebase.FirebaseWriteRead
 import com.example.allamvizsga_2020_21.Firebase.SuccessListener
 import com.example.allamvizsga_2020_21.R
 
-class SplashFragment : Fragment(), SuccessListener {
+class SplashFragment : Fragment() {
 
-    private val firebase = FirebaseWriteRead().getInstance()!!
+    private val firebase = FirebaseWriteRead
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,15 +26,16 @@ class SplashFragment : Fragment(), SuccessListener {
     override fun onResume() {
         super.onResume()
 
-        firebase.writeToDatabase("__init__", "Hello Stranger!", this)
-    }
-
-    override fun onSuccess() {
         val navController = findNavController()
-        navController.navigate(R.id.to_login_form_splash)
-    }
+        firebase.writeToDatabase("__init__", "Hello Stranger!", object : SuccessListener {
+            override fun onSuccess() {
+                navController.navigate(R.id.to_login_form_splash)
+            }
 
-    override fun onFail(exception: Exception) {
-        Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_LONG).show()
+            override fun onFail(exception: Exception) {
+                Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_LONG).show()
+            }
+
+        })
     }
 }
