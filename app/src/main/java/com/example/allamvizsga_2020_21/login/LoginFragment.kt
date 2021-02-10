@@ -5,16 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.allamvizsga_2020_21.Firebase.DataSnapshotListener
+import com.example.allamvizsga_2020_21.Firebase.FirebaseWriteRead
 import com.example.allamvizsga_2020_21.R
+import com.google.firebase.database.DataSnapshot
 
 class LoginFragment : Fragment() {
 
     private lateinit var signInButton: Button
     private lateinit var signUpButton: Button
     private lateinit var changePasswordButton: Button
+
+    private val firebase = FirebaseWriteRead().getInstance()!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,6 +32,17 @@ class LoginFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        firebase.readFromDatabase("__init__", object : DataSnapshotListener {
+            override fun onDataSnapshotReady(dataSnapshot: DataSnapshot) {
+                Toast.makeText(requireContext(), dataSnapshot.value.toString(), Toast.LENGTH_LONG)
+                    .show()
+            }
+
+            override fun onError() {
+                Toast.makeText(requireContext(), "Hiba!", Toast.LENGTH_LONG).show()
+            }
+        })
 
         val currentActivity = requireActivity()
         signInButton = currentActivity.findViewById(R.id.LoginButton)
