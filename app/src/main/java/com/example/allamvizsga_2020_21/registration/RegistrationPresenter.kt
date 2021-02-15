@@ -19,7 +19,7 @@ class RegistrationPresenter(view: RegistrationContract.View) :
         terms: Boolean
     ) {
         var error = false
-        var errorMessage: String = ""
+        var errorMessage = ""
 
         if (username.length < 4) {
             error = true
