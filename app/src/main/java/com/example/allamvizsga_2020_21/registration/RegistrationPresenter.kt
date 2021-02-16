@@ -20,7 +20,7 @@ class RegistrationPresenter(view: RegistrationContract.View) :
 
         userInputCheck.usernameCheck(username)
         userInputCheck.mainCheck(mail)
-        userInputCheck.passwordCheck(password, passwordAgain)
+        userInputCheck.singUpPasswordCheck(password, passwordAgain)
         userInputCheck.termsCheck(terms)
 
         val errorMessage = userInputCheck.getErrorMessage()
@@ -37,13 +37,13 @@ class RegistrationPresenter(view: RegistrationContract.View) :
                             }
 
                             override fun onFail(exception: Exception) {
-                                view!!.firebaseError(exception.message.toString())
+                                view!!.error(exception.message.toString())
                             }
                         })
                 }
 
                 override fun onFail(exception: Exception) {
-                    view!!.firebaseError(exception.message.toString())
+                    view!!.error(exception.message.toString())
                 }
             })
         }

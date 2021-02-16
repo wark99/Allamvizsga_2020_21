@@ -26,7 +26,7 @@ class UserInputCheck(private var errorMessage: String) {
         }
     }
 
-    fun passwordCheck(password: String, passwordAgain: String) {
+    fun singUpPasswordCheck(password: String, passwordAgain: String) {
         if (password.length < 6) {
             errorMessage += "Password is short or empty!\n"
         }
@@ -37,6 +37,16 @@ class UserInputCheck(private var errorMessage: String) {
 
         if (passwordAgain != password) {
             errorMessage += "Different passwords!\n"
+        }
+    }
+
+    fun logInPasswordCheck(password: String) {
+        if (password.length < 6) {
+            errorMessage += "Password is short or empty!\n"
+        }
+
+        if (passwordPattern.containsMatchIn(password)) {
+            errorMessage += "Invalid password!\n"
         }
     }
 

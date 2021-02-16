@@ -21,7 +21,7 @@ class RegistrationFragment : Fragment(), RegistrationContract.View {
     private val presenter: RegistrationContract.Presenter = RegistrationPresenter(this)
 
     private lateinit var currentLayout: ConstraintLayout
-    private lateinit var loading: ConstraintLayout
+    private lateinit var loadingLayout: ConstraintLayout
 
     private lateinit var error: TextView
     private lateinit var username: EditText
@@ -50,8 +50,8 @@ class RegistrationFragment : Fragment(), RegistrationContract.View {
         currentActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         navController = findNavController()
 
+        loadingLayout = currentActivity.findViewById(R.id.registrationLoading)
         currentLayout = currentActivity.findViewById(R.id.signUpLayout)
-        loading = currentActivity.findViewById(R.id.loading)
 
         error = currentActivity.findViewById(R.id.RegistrationErrorOutputTextView)
         username = currentActivity.findViewById(R.id.RegistrationUsernameInputEditText)
@@ -94,18 +94,13 @@ class RegistrationFragment : Fragment(), RegistrationContract.View {
         stopLoading()
     }
 
-    override fun firebaseError(exception: String) {
-        error.text = exception
-        stopLoading()
-    }
-
-    private fun showLoading() {
+    override fun showLoading() {
         currentLayout.visibility = View.INVISIBLE
-        loading.visibility = View.VISIBLE
+        loadingLayout.visibility = View.VISIBLE
     }
 
-    private fun stopLoading() {
-        loading.visibility = View.INVISIBLE
+    override fun stopLoading() {
+        loadingLayout.visibility = View.INVISIBLE
         currentLayout.visibility = View.VISIBLE
     }
 }
