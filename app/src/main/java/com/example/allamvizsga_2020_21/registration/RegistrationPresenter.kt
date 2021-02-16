@@ -4,12 +4,10 @@ import com.example.allamvizsga_2020_21.Firebase.Data.UserData
 import com.example.allamvizsga_2020_21.Firebase.FirebaseAccountManager
 import com.example.allamvizsga_2020_21.Firebase.Listeners.SuccessListener
 import com.example.allamvizsga_2020_21.Firebase.UserAPIService
+import com.example.allamvizsga_2020_21.Firebase.UserInputCheck
 
 class RegistrationPresenter(view: RegistrationContract.View) :
     RegistrationContract.Presenter(view) {
-
-    private val usernameAndPasswordPattern = "[^a-zA-Z0-9]".toRegex()
-    private val mailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
     override fun singUp(
         username: String,
@@ -18,50 +16,16 @@ class RegistrationPresenter(view: RegistrationContract.View) :
         passwordAgain: String,
         terms: Boolean
     ) {
-        var error = false
-        var errorMessage = ""
+        val userInputCheck = UserInputCheck("")
 
-        if (username.length < 4) {
-            error = true
-            errorMessage += "Username is short or empty!\n"
-        }
+        userInputCheck.usernameCheck(username)
+        userInputCheck.mainCheck(mail)
+        userInputCheck.passwordCheck(password, passwordAgain)
+        userInputCheck.termsCheck(terms)
 
-        if (usernameAndPasswordPattern.containsMatchIn(username)) {
-            error = true
-            errorMessage += "Username contains invalid characters!\n"
-        }
+        val errorMessage = userInputCheck.getErrorMessage()
 
-        if (mail.isEmpty()) {
-            error = true
-            errorMessage += "Empty mail field!\n"
-        }
-
-        if (!mailPattern.matches(mail)) {
-            error = true
-            errorMessage += "Invalid email address!\n"
-        }
-
-        if (password.length < 6) {
-            error = true
-            errorMessage += "Password is short or empty!\n"
-        }
-
-        if (usernameAndPasswordPattern.containsMatchIn(password)) {
-            error = true
-            errorMessage += "Invalid password!\n"
-        }
-
-        if (passwordAgain != password) {
-            error = true
-            errorMessage += "Different passwords!\n"
-        }
-
-        if (!terms) {
-            error = true
-            errorMessage += "Check user agreement!"
-        }
-
-        if (error) {
+        if (errorMessage.isNotEmpty()) {
             view!!.error(errorMessage)
         } else {
             FirebaseAccountManager().signUp(mail, password, object : SuccessListener {
@@ -75,7 +39,6 @@ class RegistrationPresenter(view: RegistrationContract.View) :
                             override fun onFail(exception: Exception) {
                                 view!!.firebaseError(exception.message.toString())
                             }
-
                         })
                 }
 

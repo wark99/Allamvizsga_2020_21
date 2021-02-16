@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:autofillHints=""
                 android:hint="@string/username"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -89,7 +90,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/email"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -113,7 +115,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/password_registration"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -137,7 +140,8 @@
                 android:autofillHints=""
                 android:ems="10"
                 android:hint="@string/password_again"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="25" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
