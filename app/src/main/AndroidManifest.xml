@@ -10,7 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Allamvizsga_2020_21"
         tools:ignore="AllowBackup">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

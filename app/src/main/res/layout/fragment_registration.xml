@@ -6,175 +6,185 @@
     android:layout_height="match_parent"
     tools:context=".registration.RegistrationFragment">
 
-    <ImageView
-        android:id="@+id/appLogo"
-        android:layout_width="@dimen/registration_screen_icon_size"
-        android:layout_height="@dimen/registration_screen_icon_size"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_margin"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        android:contentDescription="@string/appLogo"
-        android:src="@mipmap/app_icon"
-        app:layout_constraintBottom_toTopOf="@+id/ErrorOutputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/registrationLoading"
+        layout="@layout/fragment_splash"
+        android:visibility="invisible" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/ErrorOutputLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/signUpLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/UsernameInputlayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appLogo">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ErrorOutputEditText"
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="@dimen/registration_screen_icon_size"
+            android:layout_height="@dimen/registration_screen_icon_size"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            android:contentDescription="@string/appLogo"
+            android:src="@mipmap/app_icon"
+            app:layout_constraintBottom_toTopOf="@+id/RegistrationErrorOutputTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/RegistrationErrorOutputTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/error_message" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            android:textColor="@color/error_message"
+            app:layout_constraintBottom_toTopOf="@+id/RegistrationUsernameInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appLogo" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/UsernameInputlayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toTopOf="@+id/MailInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ErrorOutputLayout">
-
-        <EditText
-            android:id="@+id/UsernameInputEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistrationUsernameInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:hint="@string/username"
-            android:inputType="text" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            app:layout_constraintBottom_toTopOf="@+id/RegistrationMailInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationErrorOutputTextView">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/MailInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UsernameInputlayout">
+            <EditText
+                android:id="@+id/RegistrationUsernameInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints=""
+                android:hint="@string/username"
+                android:inputType="text"
+                android:maxLength="25" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/MailInputEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistrationMailInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            app:layout_constraintBottom_toTopOf="@+id/RegistrationPasswordInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationUsernameInputLayout">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PasswordInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toTopOf="@+id/PasswordInputLayoutAgain"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MailInputLayout">
+            <EditText
+                android:id="@+id/RegistrationMailInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:maxLength="25" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/PasswordInputEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistrationPasswordInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password_registration"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            app:layout_constraintBottom_toTopOf="@+id/RegistrationPasswordInputLayoutAgain"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationMailInputLayout">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PasswordInputLayoutAgain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        app:layout_constraintBottom_toTopOf="@+id/CheckBox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordInputLayout">
+            <EditText
+                android:id="@+id/RegistrationPasswordInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password_registration"
+                android:inputType="textPassword"
+                android:maxLength="25" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/PasswordInputEditTextAgain"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/RegistrationPasswordInputLayoutAgain"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/password_again"
-            android:inputType="textPassword" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            app:layout_constraintBottom_toTopOf="@+id/CheckBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationPasswordInputLayout">
 
-    <CheckBox
-        android:id="@+id/CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_side_distance"
-        app:layout_constraintEnd_toStartOf="@+id/TermsButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordInputLayoutAgain" />
+            <EditText
+                android:id="@+id/RegistrationPasswordInputEditTextAgain"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/password_again"
+                android:inputType="textPassword"
+                android:maxLength="25" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/TermsButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/global_side_distance"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:background="@android:color/transparent"
-        android:backgroundTint="@color/transparent_background"
-        android:text="@string/terms"
-        android:textAlignment="textStart"
-        android:textColor="@color/blue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/CheckBox"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordInputLayoutAgain" />
+        <CheckBox
+            android:id="@+id/CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_side_distance"
+            app:layout_constraintEnd_toStartOf="@+id/TermsButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationPasswordInputLayoutAgain" />
 
-    <Button
-        android:id="@+id/RegistrationButton"
-        android:layout_width="@dimen/button_width"
-        android:layout_height="@dimen/button_height"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
-        android:text="@string/registrationButton"
-        app:cornerRadius="@dimen/button_corner_radius"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TermsButton" />
+        <Button
+            android:id="@+id/TermsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_side_distance"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:background="@android:color/transparent"
+            android:backgroundTint="@color/transparent_background"
+            android:text="@string/terms"
+            android:textAlignment="textStart"
+            android:textColor="@color/blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/CheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/RegistrationPasswordInputLayoutAgain" />
+
+        <Button
+            android:id="@+id/RegistrationButton"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_top_distance"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            android:text="@string/registrationButton"
+            app:cornerRadius="@dimen/button_corner_radius"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TermsButton" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
