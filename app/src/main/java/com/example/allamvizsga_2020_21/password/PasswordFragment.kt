@@ -1,21 +1,33 @@
 package com.example.allamvizsga_2020_21.password
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
 
-class PasswordFragment : Fragment() {
+class PasswordFragment : Fragment(), PasswordContract.View, LoadingSwitch {
+
+    private val presenter: PasswordContract.Presenter = PasswordPresenter(this)
+
+    private lateinit var loadingLayout: ConstraintLayout
+    private lateinit var currentLayout: ConstraintLayout
+
+    private lateinit var mail: EditText
+    private lateinit var error: TextView
 
     private lateinit var submitButton: Button
-    private lateinit var mailsFloatingActionButton: FloatingActionButton
-    private var submitWasPressed = false
+
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,26 +41,45 @@ class PasswordFragment : Fragment() {
         super.onResume()
 
         val currentActivity = requireActivity()
-        submitButton = currentActivity.findViewById(R.id.SubmitButton)
-        mailsFloatingActionButton = currentActivity.findViewById(R.id.MailFloatingActionButton)
 
-        val navController = findNavController()
+        loadingLayout = currentActivity.findViewById(R.id.PasswordLoading)
+        currentLayout = currentActivity.findViewById(R.id.PasswordLayout)
+
+        mail = currentActivity.findViewById(R.id.PassworMailInputEditText)
+        error = currentActivity.findViewById(R.id.PasswordErrorOutputTextView)
+
+        submitButton = currentActivity.findViewById(R.id.SubmitButton)
+
+        navController = findNavController()
 
         submitButton.setOnClickListener {
-            submitWasPressed = true
-        }
+            Dispatchers.Main.run {
+                showLoading()
+            }
 
-        mailsFloatingActionButton.setOnClickListener {
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_APP_EMAIL)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-
-            //TODO: When to redirect the user?
-            if (submitWasPressed) {
-                navController.navigate(R.id.to_login_from_password)
-                submitWasPressed = false
+            Dispatchers.IO.run {
+                presenter.setNewPassword(mail.text.toString())
             }
         }
+    }
+
+    override fun error(errorMessage: String) {
+        error.text = errorMessage
+        stopLoading()
+    }
+
+    override fun verified() {
+        navController.navigate(R.id.to_login_from_password)
+        stopLoading()
+    }
+
+    override fun showLoading() {
+        currentLayout.visibility = View.INVISIBLE
+        loadingLayout.visibility = View.VISIBLE
+    }
+
+    override fun stopLoading() {
+        loadingLayout.visibility = View.INVISIBLE
+        currentLayout.visibility = View.VISIBLE
     }
 }

@@ -13,10 +13,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
 
-class RegistrationFragment : Fragment(), RegistrationContract.View {
+class RegistrationFragment : Fragment(), RegistrationContract.View, LoadingSwitch {
 
     private val presenter: RegistrationContract.Presenter = RegistrationPresenter(this)
 
