@@ -2,7 +2,7 @@ package com.example.allamvizsga_2020_21.Firebase
 
 class UserInputCheck(private var errorMessage: String) {
 
-    private val usernamePattern = Regex("[^a-zA-Z0-9]")
+    private val usernamePattern = Regex("[^a-zA-Z0-9 ]")
     private val mailPattern = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
 
     fun usernameCheck(username: String) {
