@@ -4,7 +4,6 @@ class UserInputCheck(private var errorMessage: String) {
 
     private val usernamePattern = Regex("[^a-zA-Z0-9]")
     private val mailPattern = Regex("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")
-    private val passwordPattern = Regex("[^a-zA-Z0-9]")
 
     fun usernameCheck(username: String) {
         if (username.length < 4) {
@@ -31,10 +30,6 @@ class UserInputCheck(private var errorMessage: String) {
             errorMessage += "Password is short or empty!\n"
         }
 
-        if (passwordPattern.containsMatchIn(password)) {
-            errorMessage += "Invalid password!\n"
-        }
-
         if (passwordAgain != password) {
             errorMessage += "Different passwords!\n"
         }
@@ -43,10 +38,6 @@ class UserInputCheck(private var errorMessage: String) {
     fun logInPasswordCheck(password: String) {
         if (password.length < 6) {
             errorMessage += "Password is short or empty!\n"
-        }
-
-        if (passwordPattern.containsMatchIn(password)) {
-            errorMessage += "Invalid password!\n"
         }
     }
 
