@@ -43,6 +43,10 @@ class MainFragment : Fragment(), MainContract.View {
 
         navController = findNavController()
 
+        camerasButton.setOnClickListener {
+            navController.navigate(R.id.to_loveVideoFramgent_from_main)
+        }
+
         logOutButton.setOnClickListener {
             Dispatchers.IO.run {
                 presenter.logOut()

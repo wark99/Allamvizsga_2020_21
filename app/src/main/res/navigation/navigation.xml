@@ -66,5 +66,13 @@
         <action
             android:id="@+id/to_login_from_main"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/to_loveVideoFramgent_from_main"
+            app:destination="@id/liveVideoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/liveVideoFragment"
+        android:name="com.example.allamvizsga_2020_21.main.LiveVideoFragment"
+        android:label="fragment_live_video"
+        tools:layout="@layout/fragment_live_video" />
 </navigation>
