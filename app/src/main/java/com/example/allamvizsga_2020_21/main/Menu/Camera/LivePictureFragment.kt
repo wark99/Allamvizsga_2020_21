@@ -1,6 +1,5 @@
-package com.example.allamvizsga_2020_21.main
+package com.example.allamvizsga_2020_21.main.Menu.Camera
 
-import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,12 +10,13 @@ import android.widget.VideoView
 import androidx.fragment.app.Fragment
 import com.example.allamvizsga_2020_21.R
 
-class LiveVideoFragment : Fragment() {
+class LivePictureFragment : Fragment() {
 
     private lateinit var videoView: VideoView
     private lateinit var mediaController: MediaController
     private val onlineSource =
-        Uri.parse("https://cdn.api.video/vod/vi3pfGrhpRkGPTJkZOhdHmJ6/mp4/720/source.mp4")
+        Uri.parse("https://firebasestorage.googleapis.com/v0/b/allamvizsga-b617a.appspot.com/o/Cat%20pushed%20dumpster.mp4?alt=media&token=973683a3-283e-4b40-8e57-cf90e933924e")
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
