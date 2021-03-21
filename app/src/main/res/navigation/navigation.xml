@@ -66,5 +66,22 @@
         <action
             android:id="@+id/to_login_from_main"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/toCameraSelectionFromMain"
+            app:destination="@id/selectCameraFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/selectCameraFragment"
+        android:name="com.example.allamvizsga_2020_21.main.Menu.Camera.SelectCameraFragment"
+        android:label="fragment_select_camera"
+        tools:layout="@layout/fragment_select_camera" >
+        <action
+            android:id="@+id/toLiveFromCamera"
+            app:destination="@id/livePictureFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/livePictureFragment"
+        android:name="com.example.allamvizsga_2020_21.main.Menu.Camera.LivePictureFragment"
+        android:label="fragment_live_video"
+        tools:layout="@layout/fragment_live_video" />
 </navigation>

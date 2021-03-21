@@ -30,7 +30,7 @@ class RegistrationPresenter(view: RegistrationContract.View) :
         } else {
             FirebaseAccountManager().signUp(mail, password, object : SuccessListener {
                 override fun onSuccess() {
-                    UserAPIService.writeUserData(UserData(username, mail, password, terms),
+                    UserAPIService.writeUserData(UserData(username, mail, terms),
                         object : SuccessListener {
                             override fun onSuccess() {
                                 view!!.verified()
