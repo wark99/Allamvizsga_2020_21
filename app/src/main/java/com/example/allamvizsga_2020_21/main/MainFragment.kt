@@ -44,7 +44,11 @@ class MainFragment : Fragment(), MainContract.View {
         navController = findNavController()
 
         camerasButton.setOnClickListener {
-            navController.navigate(R.id.toCameraSelectionFromMain)
+            navController.navigate(R.id.to_camera_selection_from_main)
+        }
+
+        historyButton.setOnClickListener {
+            navController.navigate(R.id.to_history_from_main)
         }
 
         logOutButton.setOnClickListener {

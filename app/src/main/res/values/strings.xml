@@ -51,4 +51,7 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     <string name="select_camera_text">Select camera: </string>
     //list_item_select_camera
     <string name="placeholder">Placeholder</string>
+
+    <string name="history_header_text">Time | Camera Name | Severity</string>
+    <string name="history_list_item"/>
 </resources>
