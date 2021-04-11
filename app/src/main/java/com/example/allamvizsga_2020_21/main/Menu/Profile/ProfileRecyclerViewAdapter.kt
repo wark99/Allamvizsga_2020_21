@@ -10,12 +10,25 @@ import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
 import com.example.allamvizsga_2020_21.R
 
 class ProfileRecyclerViewAdapter(
-    private var dataset: ArrayList<ProfileData>
+    private var dataset: ArrayList<ProfileData>,
+    private var onLongClickListener: OnItemLongClickListener
 ) : RecyclerView.Adapter<ProfileRecyclerViewAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnLongClickListener {
         var personImage: ImageView = view.findViewById(R.id.listItemProfile)
         var personName: TextView = view.findViewById(R.id.listItemName)
+
+        init {
+            view.setOnLongClickListener(this)
+        }
+
+        override fun onLongClick(view: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                onLongClickListener.onItemLongClick(position)
+            }
+            return true
+        }
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -32,5 +45,9 @@ class ProfileRecyclerViewAdapter(
 
     override fun getItemCount(): Int {
         return dataset.size
+    }
+
+    interface OnItemLongClickListener {
+        fun onItemLongClick(position: Int)
     }
 }

@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
 import com.example.allamvizsga_2020_21.R
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : Fragment(), ProfileRecyclerViewAdapter.OnItemLongClickListener {
+
+    private val dataSet = arrayListOf<ProfileData>()
+    private lateinit var adapter: ProfileRecyclerViewAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,21 +27,25 @@ class ProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        val dataSet = arrayListOf<ProfileData>()
-        val uri=Uri.parse("android.resource://com.example.allamvizsga_2020_21/drawable/profile")
+        val uri = Uri.parse("android.resource://com.example.allamvizsga_2020_21/drawable/profile")
 
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
-        dataSet.add(ProfileData(uri,"name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
+        dataSet.add(ProfileData(uri, "name"))
 
-        val adapter = ProfileRecyclerViewAdapter(dataSet)
+        adapter = ProfileRecyclerViewAdapter(dataSet, this)
         val recyclerView = requireActivity().findViewById<RecyclerView>(R.id.trustListRecyclerView)
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
+    }
+
+    override fun onItemLongClick(position: Int) {
+        dataSet.removeAt(position)
+        adapter.notifyDataSetChanged()
     }
 }
