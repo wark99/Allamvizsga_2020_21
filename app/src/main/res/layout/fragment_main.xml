@@ -114,10 +114,12 @@
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_bottom_distance"
         android:text="@string/profile_title"
         android:textAlignment="center"
         android:textSize="@dimen/menu_text_size"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/armingSwitch"
         app:layout_constraintEnd_toStartOf="@+id/LogOutTextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ProfileImageButton" />
@@ -154,5 +156,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ProfileTextView"
         app:layout_constraintTop_toBottomOf="@+id/LogOutImageButton" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/armingSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:text="@string/arming_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ProfileTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

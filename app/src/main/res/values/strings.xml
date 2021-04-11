@@ -46,6 +46,7 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     <string name="profile_title">Profile</string>
     <string name="exit_button">Log Out</string>
     <string name="exit_title">Log Out</string>
+    <string name="arming_button">Activate system</string>
 
     //Camera Selection Screen
     <string name="select_camera_text">Select camera: </string>

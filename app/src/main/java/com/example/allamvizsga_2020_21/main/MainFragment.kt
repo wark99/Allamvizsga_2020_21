@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.activity.addCallback
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ class MainFragment : Fragment(), MainContract.View {
     private lateinit var historyButton: ImageButton
     private lateinit var profileButton: ImageButton
     private lateinit var logOutButton: ImageButton
+    private lateinit var armingSwitch: SwitchCompat
 
     private lateinit var navController: NavController
 
@@ -40,6 +42,7 @@ class MainFragment : Fragment(), MainContract.View {
         historyButton = currentActivity.findViewById(R.id.HistoryImageButton)
         profileButton = currentActivity.findViewById(R.id.ProfileImageButton)
         logOutButton = currentActivity.findViewById(R.id.LogOutImageButton)
+        armingSwitch = currentActivity.findViewById(R.id.armingSwitch)
 
         navController = findNavController()
 
