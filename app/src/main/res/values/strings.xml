@@ -50,6 +50,7 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
 
     //Camera Selection Screen
     <string name="select_camera_text">Select camera: </string>
+    <string name="network_error">Network Error</string>
     //list_item_select_camera
     <string name="placeholder">Placeholder</string>
 
