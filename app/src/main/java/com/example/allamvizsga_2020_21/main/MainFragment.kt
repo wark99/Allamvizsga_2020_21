@@ -51,6 +51,10 @@ class MainFragment : Fragment(), MainContract.View {
             navController.navigate(R.id.to_history_from_main)
         }
 
+        profileButton.setOnClickListener {
+            navController.navigate(R.id.to_profile_from_main)
+        }
+
         logOutButton.setOnClickListener {
             Dispatchers.IO.run {
                 presenter.logOut()
