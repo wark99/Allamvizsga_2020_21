@@ -63,8 +63,8 @@
 
     <ImageView
         android:id="@+id/selectedImageImageView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/global_icon_size"
+        android:layout_height="@dimen/global_icon_size"
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_margin"
         android:layout_marginEnd="@dimen/global_margin"

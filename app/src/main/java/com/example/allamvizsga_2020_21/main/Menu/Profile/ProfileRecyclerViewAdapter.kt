@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
 import com.example.allamvizsga_2020_21.R
 
@@ -26,7 +25,9 @@ class ProfileRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        Glide.with(viewHolder.personImage).load(dataset[position]).into(viewHolder.personImage)
+        //Glide.with(viewHolder.personImage).load(dataset[position].pictureURL).into(viewHolder.personImage)
+        viewHolder.personImage.setImageURI(dataset[position].pictureURL)
+        viewHolder.personName.text = dataset[position].personName
     }
 
     override fun getItemCount(): Int {
