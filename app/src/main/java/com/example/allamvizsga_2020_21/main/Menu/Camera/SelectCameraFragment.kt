@@ -6,17 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allamvizsga_2020_21.R
+import com.example.allamvizsga_2020_21.mvvm.VideoViewModel
 
 
 class SelectCameraFragment : Fragment(), SelectCameraContract.View,
     CameraSelectionRecyclerViewAdapter.OnItemClickListener {
 
     private val presenter: SelectCameraContract.Presenter = SelectCameraPresenter(this)
+    private lateinit var viewModel: VideoViewModel
 
     private lateinit var navController: NavController
 
@@ -32,6 +35,14 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_select_camera, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(VideoViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
     }
 
     override fun onResume() {
@@ -50,6 +61,8 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
     }
 
     override fun onItemClick(position: Int) {
+        viewModel.data.value = dataSet[position]
+
         navController.navigate(R.id.toLiveFromCamera)
     }
 
