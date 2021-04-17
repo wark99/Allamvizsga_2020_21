@@ -26,7 +26,7 @@ class HistoryRecyclerViewAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.timeTextView.text = dataSet[position].time.toString()
-        viewHolder.cameraNameTextView.text = dataSet[position].cameraName
+        viewHolder.cameraNameTextView.text = dataSet[position].camera
         viewHolder.severityTextView.text = dataSet[position].severity.toString()
     }
 
