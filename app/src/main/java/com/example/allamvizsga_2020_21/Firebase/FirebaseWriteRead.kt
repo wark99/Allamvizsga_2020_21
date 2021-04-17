@@ -18,7 +18,7 @@ object FirebaseWriteRead {
     }
 
     fun readFromDatabase(path: String, dataSnapshotListener: DataSnapshotListener) {
-        databaseReference.child(path).addListenerForSingleValueEvent(object : ValueEventListener {
+        databaseReference.child(path).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 dataSnapshotListener.onDataSnapshotReady(snapshot)
             }

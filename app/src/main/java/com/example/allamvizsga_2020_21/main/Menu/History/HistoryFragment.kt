@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.allamvizsga_2020_21.ConnectionChecker
 import com.example.allamvizsga_2020_21.Firebase.Data.HistoryData
 import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
@@ -53,7 +54,11 @@ class HistoryFragment : Fragment(), HistoryContract.View, LoadingSwitch {
         }
 
         Dispatchers.IO.run {
-            presenter.loadHistory()
+            if (ConnectionChecker(requireContext()).isConnected()) {
+                presenter.loadHistory()
+            } else {
+                presenter.networkError()
+            }
         }
     }
 

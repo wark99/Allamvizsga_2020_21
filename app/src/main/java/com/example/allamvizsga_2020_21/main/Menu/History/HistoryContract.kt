@@ -13,5 +13,6 @@ interface HistoryContract {
 
     abstract class Presenter(view: View) : BasePresenter<View>(view) {
         abstract fun loadHistory()
+        abstract fun networkError()
     }
 }
