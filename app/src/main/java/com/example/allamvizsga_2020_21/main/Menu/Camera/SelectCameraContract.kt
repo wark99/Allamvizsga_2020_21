@@ -12,5 +12,6 @@ interface SelectCameraContract {
 
     abstract class Presenter(view: View) : BasePresenter<View>(view) {
         abstract fun loadCameras()
+        abstract fun connectionError()
     }
 }

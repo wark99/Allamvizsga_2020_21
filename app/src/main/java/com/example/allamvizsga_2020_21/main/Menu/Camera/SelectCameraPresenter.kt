@@ -18,4 +18,8 @@ class SelectCameraPresenter(view: SelectCameraContract.View) :
 
         })
     }
+
+    override fun connectionError() {
+        view!!.loadingError()
+    }
 }

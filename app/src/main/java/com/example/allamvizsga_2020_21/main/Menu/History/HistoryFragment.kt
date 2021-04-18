@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.allamvizsga_2020_21.ConnectionChecker
 import com.example.allamvizsga_2020_21.Firebase.Data.HistoryData
-import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
+import com.example.allamvizsga_2020_21.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
 
-class HistoryFragment : Fragment(), HistoryContract.View, LoadingSwitch {
+class HistoryFragment : Fragment(), HistoryContract.View {
 
     private val presenter: HistoryContract.Presenter = HistoryPresenter(this)
 
@@ -50,7 +50,7 @@ class HistoryFragment : Fragment(), HistoryContract.View, LoadingSwitch {
         errorTextView.visibility = View.INVISIBLE
 
         Dispatchers.Main.run {
-            showLoading()
+            LoadingSwitch().showLoading(currentLayout, loadingLayout)
         }
 
         Dispatchers.IO.run {
@@ -68,23 +68,13 @@ class HistoryFragment : Fragment(), HistoryContract.View, LoadingSwitch {
         adapter = HistoryRecyclerViewAdapter(dataSet)
         recyclerView.adapter = adapter
 
-        stopLoading()
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
     }
 
     override fun loadingError() {
         recyclerView.visibility = View.INVISIBLE
         errorTextView.visibility = View.VISIBLE
 
-        stopLoading()
-    }
-
-    override fun showLoading() {
-        currentLayout.visibility = View.INVISIBLE
-        loadingLayout.visibility = View.VISIBLE
-    }
-
-    override fun stopLoading() {
-        loadingLayout.visibility = View.INVISIBLE
-        currentLayout.visibility = View.VISIBLE
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
     }
 }

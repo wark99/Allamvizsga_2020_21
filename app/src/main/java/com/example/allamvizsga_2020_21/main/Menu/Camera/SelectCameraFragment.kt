@@ -12,20 +12,23 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.allamvizsga_2020_21.ConnectionChecker
+import com.example.allamvizsga_2020_21.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import com.example.allamvizsga_2020_21.mvvm.VideoViewModel
 import kotlinx.coroutines.Dispatchers
 
 
 class SelectCameraFragment : Fragment(), SelectCameraContract.View,
-    CameraSelectionRecyclerViewAdapter.OnItemClickListener, LoadingSwitch {
+    CameraSelectionRecyclerViewAdapter.OnItemClickListener {
 
     private val presenter: SelectCameraContract.Presenter = SelectCameraPresenter(this)
     private lateinit var viewModel: VideoViewModel
 
     private lateinit var currentLayout: ConstraintLayout
     private lateinit var loadingLayout: ConstraintLayout
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
     private lateinit var navController: NavController
 
@@ -58,6 +61,7 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
 
         currentLayout = requireActivity().findViewById(R.id.cameraSelectionLayout)
         loadingLayout = requireActivity().findViewById(R.id.cameraSelectionLoadingLayout)
+        swipeRefreshLayout = requireActivity().findViewById(R.id.swipe)
 
         recyclerView = requireActivity().findViewById(R.id.cameraListRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -66,19 +70,25 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
         errorMessage = requireActivity().findViewById(R.id.networkErrorTextView)
         errorMessage.visibility = View.INVISIBLE
 
-        Dispatchers.Main.run {
-            showLoading()
-        }
+        loadMainLayout()
 
-        Dispatchers.IO.run {
-            presenter.loadCameras()
+        swipeRefreshLayout.setOnRefreshListener {
+            loadMainLayout()
         }
     }
 
-    override fun onItemClick(position: Int) {
-        viewModel.data.value = dataSet[position]
+    private fun loadMainLayout() {
+        if (ConnectionChecker(requireContext()).isConnected()) {
+            Dispatchers.Main.run {
+                LoadingSwitch().showLoading(currentLayout, loadingLayout)
+            }
 
-        navController.navigate(R.id.toLiveFromCamera)
+            Dispatchers.IO.run {
+                presenter.loadCameras()
+            }
+        } else {
+            presenter.connectionError()
+        }
     }
 
     override fun camerasLoaded(cameraList: ArrayList<String>) {
@@ -87,23 +97,24 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
         adapter = CameraSelectionRecyclerViewAdapter(dataSet, this)
         recyclerView.adapter = adapter
 
-        stopLoading()
+        errorMessage.visibility = View.INVISIBLE
+        recyclerView.visibility = View.VISIBLE
+
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun loadingError() {
         recyclerView.visibility = View.INVISIBLE
         errorMessage.visibility = View.VISIBLE
 
-        stopLoading()
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun showLoading() {
-        currentLayout.visibility = View.INVISIBLE
-        loadingLayout.visibility = View.VISIBLE
-    }
+    override fun onItemClick(position: Int) {
+        viewModel.data.value = dataSet[position]
 
-    override fun stopLoading() {
-        loadingLayout.visibility = View.INVISIBLE
-        currentLayout.visibility = View.VISIBLE
+        navController.navigate(R.id.toLiveFromCamera)
     }
 }
