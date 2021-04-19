@@ -1,4 +1,4 @@
-package com.example.allamvizsga_2020_21.main.Menu.Profile
+package com.example.allamvizsga_2020_21.main.Menu.Profile.removePerson
 
 import android.view.LayoutInflater
 import android.view.View

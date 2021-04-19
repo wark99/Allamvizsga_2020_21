@@ -1,20 +1,22 @@
 package com.example.allamvizsga_2020_21.main.Menu.Profile
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.allamvizsga_2020_21.R
 
-class ProfileFragment : Fragment(), ProfileRecyclerViewAdapter.OnItemLongClickListener {
+class ProfileFragment : Fragment() {
 
-    private val dataSet = arrayListOf<ProfileData>()
-    private lateinit var adapter: ProfileRecyclerViewAdapter
+    private lateinit var navController: NavController
+
+    private lateinit var addPersonButton: ImageButton
+    private lateinit var removePersonButton: ImageButton
+    private lateinit var addCameraButton: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,25 +29,20 @@ class ProfileFragment : Fragment(), ProfileRecyclerViewAdapter.OnItemLongClickLi
     override fun onResume() {
         super.onResume()
 
-        val uri = Uri.parse("android.resource://com.example.allamvizsga_2020_21/drawable/profile")
+        navController = findNavController()
 
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
-        dataSet.add(ProfileData(uri, "name"))
+        addPersonButton = requireActivity().findViewById(R.id.addPersonImageButton)
+        removePersonButton = requireActivity().findViewById(R.id.removePersonImageButton)
+        addCameraButton = requireActivity().findViewById(R.id.addCameraImageButton)
 
-        adapter = ProfileRecyclerViewAdapter(dataSet, this)
-        val recyclerView = requireActivity().findViewById<RecyclerView>(R.id.trustListRecyclerView)
-        recyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = adapter
-    }
+        addPersonButton.setOnClickListener {
 
-    override fun onItemLongClick(position: Int) {
-        dataSet.removeAt(position)
-        adapter.notifyDataSetChanged()
+        }
+        removePersonButton.setOnClickListener {
+
+        }
+        addCameraButton.setOnClickListener {
+
+        }
     }
 }

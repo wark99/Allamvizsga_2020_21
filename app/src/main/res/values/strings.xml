@@ -61,13 +61,11 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     //list_item_history
     <string name="history_list_item" />
 
-    //Profile
-    <string name="added_people">Added people</string>
-    <string name="remove_hint">To remove people from trusted list hold your finger on his picture</string>
-    <string name="select_picture_button">Select Picture</string>
-    <string name="selected_image">Selected image</string>
-    <string name="name_input_edit_text">Name</string>
-    <string name="upload_button">Upload Image</string>
+    //Profile Menu
+    <string name="add_person">Add Person</string>
+    <string name="remove_person">Remove Person</string>
+    <string name="add_camera">Add Camera</string>
+
     //list_ite_profile
     <string name="profile_picture">picture</string>
     <string name="profile_name" />
