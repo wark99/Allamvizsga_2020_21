@@ -63,12 +63,11 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
         currentLayout = requireActivity().findViewById(R.id.cameraSelectionLayout)
         loadingLayout = requireActivity().findViewById(R.id.cameraSelectionLoadingLayout)
 
-        swipeRefreshLayout = requireActivity().findViewById(R.id.swipe)
+        swipeRefreshLayout = requireActivity().findViewById(R.id.cameraSwipeLayout)
 
         cameraContentLayout = requireActivity().findViewById(R.id.cameraContentLayout)
-        cameraContentLayout.visibility = View.VISIBLE
         cameraErrorLayout = requireActivity().findViewById(R.id.cameraErrorLayout)
-        cameraErrorLayout.visibility = View.INVISIBLE
+        LoadingSwitch().showLoading(cameraContentLayout, cameraErrorLayout)
 
         recyclerView = requireActivity().findViewById(R.id.cameraListRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -96,21 +95,16 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
 
     override fun camerasLoaded(cameraList: ArrayList<String>) {
         dataSet = cameraList
-
         adapter = CameraSelectionRecyclerViewAdapter(dataSet, this)
         recyclerView.adapter = adapter
 
-        cameraErrorLayout.visibility = View.INVISIBLE
-        cameraContentLayout.visibility = View.VISIBLE
-
+        LoadingSwitch().showLoading(cameraErrorLayout, cameraContentLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun loadingError() {
-        cameraContentLayout.visibility = View.INVISIBLE
-        cameraErrorLayout.visibility = View.VISIBLE
-
+        LoadingSwitch().showLoading(cameraContentLayout, cameraErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
     }

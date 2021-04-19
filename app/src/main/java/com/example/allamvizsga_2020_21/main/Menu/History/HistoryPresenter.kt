@@ -18,7 +18,7 @@ class HistoryPresenter(view: HistoryContract.View) : HistoryContract.Presenter(v
         })
     }
 
-    override fun networkError() {
+    override fun connectionError() {
         view!!.loadingError()
     }
 }

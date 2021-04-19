@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.allamvizsga_2020_21.Firebase.Data.HistoryData
-import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
+import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import kotlinx.coroutines.Dispatchers
 
 class HistoryFragment : Fragment(), HistoryContract.View {
@@ -22,9 +22,12 @@ class HistoryFragment : Fragment(), HistoryContract.View {
     private lateinit var currentLayout: ConstraintLayout
     private lateinit var loadingLayout: ConstraintLayout
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var errorTextView: TextView
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
 
+    private lateinit var historyContentLayout: ConstraintLayout
+    private lateinit var historyErrorLayout: ConstraintLayout
+
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HistoryRecyclerViewAdapter
     private lateinit var dataSet: ArrayList<HistoryData>
 
@@ -42,39 +45,49 @@ class HistoryFragment : Fragment(), HistoryContract.View {
         currentLayout = requireActivity().findViewById(R.id.historyLayout)
         loadingLayout = requireActivity().findViewById(R.id.historyLoadingLayout)
 
+        swipeRefreshLayout = requireActivity().findViewById(R.id.historySwipeLayout)
+
+        historyContentLayout = requireActivity().findViewById(R.id.historyContentLayout)
+        historyErrorLayout = requireActivity().findViewById(R.id.historyErrorLayout)
+        LoadingSwitch().showLoading(historyContentLayout, historyErrorLayout)
+
         recyclerView = requireActivity().findViewById(R.id.history_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.visibility = View.VISIBLE
 
-        errorTextView = requireActivity().findViewById(R.id.historyErrorTextView)
-        errorTextView.visibility = View.INVISIBLE
+        loadMainLayout()
 
-        Dispatchers.Main.run {
-            LoadingSwitch().showLoading(currentLayout, loadingLayout)
+        swipeRefreshLayout.setOnRefreshListener {
+            loadMainLayout()
         }
+    }
 
-        Dispatchers.IO.run {
-            if (ConnectionChecker(requireContext()).isConnected()) {
-                presenter.loadHistory()
-            } else {
-                presenter.networkError()
+    private fun loadMainLayout() {
+        if (ConnectionChecker(requireContext()).isConnected()) {
+            Dispatchers.Main.run {
+                LoadingSwitch().showLoading(currentLayout, loadingLayout)
             }
+
+            Dispatchers.IO.run {
+                presenter.loadHistory()
+            }
+        } else {
+            presenter.connectionError()
         }
     }
 
     override fun historyLoaded(historyList: ArrayList<HistoryData>) {
         dataSet = historyList
-
         adapter = HistoryRecyclerViewAdapter(dataSet)
         recyclerView.adapter = adapter
 
+        LoadingSwitch().stopLoading(historyErrorLayout, historyContentLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun loadingError() {
-        recyclerView.visibility = View.INVISIBLE
-        errorTextView.visibility = View.VISIBLE
-
+        LoadingSwitch().stopLoading(historyContentLayout, historyErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 }

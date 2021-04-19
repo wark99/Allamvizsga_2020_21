@@ -12,15 +12,14 @@
         android:visibility="invisible" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipe"
+        android:id="@+id/cameraSwipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cameraSelectionLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/appLogo"
@@ -29,10 +28,8 @@
                 android:layout_marginStart="@dimen/global_margin"
                 android:layout_marginTop="@dimen/global_margin"
                 android:layout_marginEnd="@dimen/global_margin"
-                android:layout_marginBottom="@dimen/global_bottom_distance"
                 android:contentDescription="@string/appLogo"
                 android:src="@mipmap/app_icon"
-                app:layout_constraintBottom_toTopOf="@+id/cameraContentLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,13 +46,14 @@
 
                 <TextView
                     android:id="@+id/selectCameraTextView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/global_margin"
                     android:layout_marginTop="@dimen/global_margin"
                     android:layout_marginEnd="@dimen/global_margin"
                     android:layout_marginBottom="@dimen/global_bottom_distance"
                     android:text="@string/select_camera_text"
+                    android:textAlignment="center"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/cameraListRecyclerView"
