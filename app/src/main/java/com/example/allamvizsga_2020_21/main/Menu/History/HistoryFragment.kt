@@ -9,9 +9,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allamvizsga_2020_21.ConnectionChecker
+import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
 import com.example.allamvizsga_2020_21.Firebase.Data.HistoryData
-import com.example.allamvizsga_2020_21.LoadingSwitch
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
 

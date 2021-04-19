@@ -1,4 +1,4 @@
-package com.example.allamvizsga_2020_21
+package com.example.allamvizsga_2020_21.Utils
 
 import android.content.Context
 import android.net.ConnectivityManager

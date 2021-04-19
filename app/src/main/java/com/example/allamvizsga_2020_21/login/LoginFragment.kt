@@ -12,7 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.allamvizsga_2020_21.LoadingSwitch
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
 

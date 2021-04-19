@@ -32,51 +32,96 @@
                 android:layout_marginBottom="@dimen/global_bottom_distance"
                 android:contentDescription="@string/appLogo"
                 android:src="@mipmap/app_icon"
-                app:layout_constraintBottom_toTopOf="@+id/selectCameraTextView"
+                app:layout_constraintBottom_toTopOf="@+id/cameraContentLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/selectCameraTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/global_margin"
-                android:layout_marginTop="@dimen/global_margin"
-                android:layout_marginEnd="@dimen/global_margin"
-                android:layout_marginBottom="@dimen/global_bottom_distance"
-                android:text="@string/select_camera_text"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/cameraListRecyclerView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appLogo" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cameraListRecyclerView"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cameraContentLayout"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/global_margin"
-                android:layout_marginTop="@dimen/global_margin"
-                android:layout_marginEnd="@dimen/global_margin"
-                android:layout_marginBottom="@dimen/global_margin"
+                android:layout_marginTop="@dimen/global_top_distance"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selectCameraTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/appLogo">
 
-            <TextView
-                android:id="@+id/networkErrorTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/network_error"
-                android:textColor="@color/error_message"
+                <TextView
+                    android:id="@+id/selectCameraTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_bottom_distance"
+                    android:text="@string/select_camera_text"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/cameraListRecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cameraListRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_margin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/selectCameraTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cameraErrorLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/selectCameraTextView" />
+                app:layout_constraintTop_toBottomOf="@id/appLogo">
+
+                <TextView
+                    android:id="@+id/networkErrorTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:text="@string/network_error"
+                    android:textColor="@color/error_message"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/cameraLayoutRefreshHintTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/cameraLayoutRefreshHintTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_top_distance"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_margin"
+                    android:text="@string/refresh_hint"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/networkErrorTextView" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

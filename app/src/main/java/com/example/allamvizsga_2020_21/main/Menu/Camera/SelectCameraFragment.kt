@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -13,9 +12,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.allamvizsga_2020_21.ConnectionChecker
-import com.example.allamvizsga_2020_21.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
+import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import com.example.allamvizsga_2020_21.mvvm.VideoViewModel
 import kotlinx.coroutines.Dispatchers
 
@@ -28,13 +27,15 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
 
     private lateinit var currentLayout: ConstraintLayout
     private lateinit var loadingLayout: ConstraintLayout
+
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
+    private lateinit var cameraContentLayout: ConstraintLayout
+    private lateinit var cameraErrorLayout: ConstraintLayout
 
     private lateinit var navController: NavController
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var errorMessage: TextView
-
     private lateinit var dataSet: ArrayList<String>
     private lateinit var adapter: CameraSelectionRecyclerViewAdapter
 
@@ -61,14 +62,16 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
 
         currentLayout = requireActivity().findViewById(R.id.cameraSelectionLayout)
         loadingLayout = requireActivity().findViewById(R.id.cameraSelectionLoadingLayout)
+
         swipeRefreshLayout = requireActivity().findViewById(R.id.swipe)
+
+        cameraContentLayout = requireActivity().findViewById(R.id.cameraContentLayout)
+        cameraContentLayout.visibility = View.VISIBLE
+        cameraErrorLayout = requireActivity().findViewById(R.id.cameraErrorLayout)
+        cameraErrorLayout.visibility = View.INVISIBLE
 
         recyclerView = requireActivity().findViewById(R.id.cameraListRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        recyclerView.visibility = View.VISIBLE
-
-        errorMessage = requireActivity().findViewById(R.id.networkErrorTextView)
-        errorMessage.visibility = View.INVISIBLE
 
         loadMainLayout()
 
@@ -97,16 +100,16 @@ class SelectCameraFragment : Fragment(), SelectCameraContract.View,
         adapter = CameraSelectionRecyclerViewAdapter(dataSet, this)
         recyclerView.adapter = adapter
 
-        errorMessage.visibility = View.INVISIBLE
-        recyclerView.visibility = View.VISIBLE
+        cameraErrorLayout.visibility = View.INVISIBLE
+        cameraContentLayout.visibility = View.VISIBLE
 
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun loadingError() {
-        recyclerView.visibility = View.INVISIBLE
-        errorMessage.visibility = View.VISIBLE
+        cameraContentLayout.visibility = View.INVISIBLE
+        cameraErrorLayout.visibility = View.VISIBLE
 
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
