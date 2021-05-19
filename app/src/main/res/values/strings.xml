@@ -66,7 +66,18 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     <string name="remove_person">Remove Person</string>
     <string name="add_camera">Add Camera</string>
 
+    //Add person
+    <string name="selectImageButton">Choose Image From Galley</string>
+    <string name="selectedPerson">Selected Person Name</string>
+    <string name="uploadButton">Upload</string>
+
+    //Remove person
+    <string name="removePersonHint">To remove someone from list hold your finger on his picture</string>
+    <string name="saveButton">Save changes</string>
+
     //list_ite_profile
     <string name="profile_picture">picture</string>
     <string name="profile_name" />
+
+
 </resources>

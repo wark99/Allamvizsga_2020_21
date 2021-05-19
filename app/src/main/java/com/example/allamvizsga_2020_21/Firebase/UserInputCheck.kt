@@ -43,7 +43,23 @@ class UserInputCheck(private var errorMessage: String) {
 
     fun termsCheck(terms: Boolean) {
         if (!terms) {
-            errorMessage += "Check user agreement!"
+            errorMessage += "Check user agreement!\n"
+        }
+    }
+
+    fun imageCheck(image: String) {
+        if (image.isEmpty()) {
+            errorMessage += "Select image from gallery!\n"
+        }
+    }
+
+    fun nameCheck(username: String) {
+        if (username.length < 4) {
+            errorMessage += "Name is short or empty!\n"
+        }
+
+        if (usernamePattern.containsMatchIn(username)) {
+            errorMessage += "Name contains invalid characters!\n"
         }
     }
 

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.Menu.Profile.addPerson.AddPersonFragment">
+
+    <include
+        android:id="@+id/addPersonLoadingLayout"
+        layout="@layout/fragment_splash"
+        android:visibility="invisible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/addPersonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="@dimen/global_icon_size"
+            android:layout_height="@dimen/global_icon_size"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:contentDescription="@string/appLogo"
+            android:src="@mipmap/app_icon"
+            app:layout_constraintBottom_toTopOf="@+id/addPersonProcessTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/addPersonProcessTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:textColor="@color/error_message"
+            app:layout_constraintBottom_toTopOf="@id/selectImageFromGalleryButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+
+        <Button
+            android:id="@+id/selectImageFromGalleryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:text="@string/selectImageButton"
+            app:layout_constraintBottom_toTopOf="@+id/chosenImageImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addPersonProcessTextView" />
+
+        <ImageView
+            android:id="@+id/chosenImageImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:contentDescription="@string/placeholder"
+            android:src="@drawable/profile"
+            app:layout_constraintBottom_toTopOf="@+id/selectedPersonNameTextInputLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectImageFromGalleryButton" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/selectedPersonNameTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            app:layout_constraintBottom_toTopOf="@+id/uploadButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chosenImageImageView">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/selectedPersonNameTextInputEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/selectedPerson" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/uploadButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            android:text="@string/uploadButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/selectedPersonNameTextInputLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

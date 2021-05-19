@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.Menu.Profile.removePerson.RemovePersonFragment">
+
+    <include
+        android:id="@+id/removePersonLoadingLayout"
+        layout="@layout/fragment_splash"
+        android:visibility="invisible" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/removePersonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/appLogo"
+            android:layout_width="@dimen/global_icon_size"
+            android:layout_height="@dimen/global_icon_size"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:contentDescription="@string/appLogo"
+            android:src="@mipmap/app_icon"
+            app:layout_constraintBottom_toTopOf="@+id/removeHintTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/removeHintTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            android:text="@string/removePersonHint"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textSize="@dimen/menu_text_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/removePersonRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/removePersonRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            app:layout_constraintBottom_toTopOf="@+id/removePersonErrorTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removeHintTextView" />
+
+        <TextView
+            android:id="@+id/removePersonErrorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_bottom_distance"
+            app:layout_constraintBottom_toTopOf="@+id/saveButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removePersonRecyclerView" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/global_margin"
+            android:layout_marginTop="@dimen/global_margin"
+            android:layout_marginEnd="@dimen/global_margin"
+            android:layout_marginBottom="@dimen/global_margin"
+            android:text="@string/saveButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/removePersonErrorTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

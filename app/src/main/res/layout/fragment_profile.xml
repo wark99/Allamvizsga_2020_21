@@ -24,7 +24,7 @@
         android:layout_width="@dimen/global_icon_size"
         android:layout_height="@dimen/global_icon_size"
         android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginTop="@dimen/menu_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
         android:layout_marginBottom="@dimen/global_bottom_distance"
         android:background="@color/blue"
@@ -42,12 +42,10 @@
         android:layout_marginStart="@dimen/global_margin"
         android:layout_marginTop="@dimen/global_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_margin"
         android:text="@string/add_person"
         android:textAlignment="center"
         android:textSize="@dimen/menu_text_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/addCameraImageButton"
         app:layout_constraintEnd_toStartOf="@+id/removePersonRextView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addPersonImageButton" />
@@ -57,7 +55,7 @@
         android:layout_width="@dimen/global_icon_size"
         android:layout_height="@dimen/global_icon_size"
         android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginTop="@dimen/menu_top_distance"
         android:layout_marginEnd="@dimen/global_margin"
         android:layout_marginBottom="@dimen/global_bottom_distance"
         android:background="@color/blue"
@@ -82,36 +80,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addPersonTextView"
         app:layout_constraintTop_toBottomOf="@+id/removePersonImageButton" />
-
-    <ImageButton
-        android:id="@+id/addCameraImageButton"
-        android:layout_width="@dimen/global_icon_size"
-        android:layout_height="@dimen/global_icon_size"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_margin"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:layout_marginBottom="@dimen/global_bottom_distance"
-        android:background="@color/blue"
-        android:contentDescription="@string/add_camera"
-        android:src="@drawable/add_camera"
-        app:layout_constraintBottom_toTopOf="@+id/addCameraTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPersonTextView" />
-
-    <TextView
-        android:id="@+id/addCameraTextView"
-        android:layout_width="@dimen/global_icon_size"
-        android:layout_height="24dp"
-        android:layout_marginStart="@dimen/global_margin"
-        android:layout_marginTop="@dimen/global_top_distance"
-        android:layout_marginEnd="@dimen/global_margin"
-        android:text="@string/add_camera"
-        android:textAlignment="center"
-        android:textSize="@dimen/menu_text_size"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCameraImageButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

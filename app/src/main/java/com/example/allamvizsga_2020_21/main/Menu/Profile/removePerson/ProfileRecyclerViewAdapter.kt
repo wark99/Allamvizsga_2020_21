@@ -39,7 +39,7 @@ class ProfileRecyclerViewAdapter(
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         //Glide.with(viewHolder.personImage).load(dataset[position].pictureURL).into(viewHolder.personImage)
-        viewHolder.personImage.setImageURI(dataset[position].pictureURL)
+        //viewHolder.personImage.setImageURI(dataset[position].pictureURL)
         viewHolder.personName.text = dataset[position].personName
     }
 
