@@ -10,7 +10,7 @@ object HistoryAPIService {
 
     fun readHistory(historyListener: HistoryListener) {
         val path = "history/" + FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseWriteRead.readFromDatabase(path, object : DataSnapshotListener {
+        FirebaseOperations.readFromDatabase(path, object : DataSnapshotListener {
             override fun onDataSnapshotReady(dataSnapshot: DataSnapshot) {
                 val historyList = arrayListOf<HistoryData>()
                 for (item in dataSnapshot.children) {

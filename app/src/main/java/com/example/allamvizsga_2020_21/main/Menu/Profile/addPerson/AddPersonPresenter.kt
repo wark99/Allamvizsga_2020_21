@@ -2,8 +2,9 @@ package com.example.allamvizsga_2020_21.main.Menu.Profile.addPerson
 
 import android.net.Uri
 import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
-import com.example.allamvizsga_2020_21.Firebase.FirebaseWriteRead
+import com.example.allamvizsga_2020_21.Firebase.FirebaseOperations
 import com.example.allamvizsga_2020_21.Firebase.Listeners.SuccessListener
+import com.example.allamvizsga_2020_21.Firebase.Listeners.UploadSuccessListener
 import com.example.allamvizsga_2020_21.Firebase.ProfileAPIService
 import com.example.allamvizsga_2020_21.Firebase.UserInputCheck
 import com.google.firebase.auth.FirebaseAuth
@@ -23,14 +24,13 @@ class AddPersonPresenter(view: AddPersonContract.View) : AddPersonContract.Prese
             view!!.uploadFail(errorMessage)
         } else {
             val path: String = FirebaseAuth.getInstance().currentUser!!.uid + "/" + personName
-            FirebaseWriteRead.uploadImage(
+            FirebaseOperations.uploadImage(
                 path,
                 selectedPicture,
-                personName,
-                object : SuccessListener {
-                    override fun onSuccess() {
+                object : UploadSuccessListener {
+                    override fun onSuccess(uri: Uri) {
                         ProfileAPIService.writeProfileData(
-                            ProfileData(path, personName),
+                            ProfileData(personName, uri.toString()),
                             object : SuccessListener {
                                 override fun onSuccess() {
                                     view!!.uploadSuccess()

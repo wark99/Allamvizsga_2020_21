@@ -9,7 +9,7 @@ object CameraAPIService {
 
     fun readLiveCamera(livePictureListener: LivePictureListener) {
         val path = "camera/" + FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseWriteRead.readFromDatabase(path, object : DataSnapshotListener {
+        FirebaseOperations.readFromDatabase(path, object : DataSnapshotListener {
             override fun onDataSnapshotReady(dataSnapshot: DataSnapshot) {
                 val cameraList = arrayListOf<String>()
                 for (item in dataSnapshot.children) {

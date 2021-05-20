@@ -11,83 +11,97 @@
         layout="@layout/fragment_splash"
         android:visibility="invisible" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/removePersonLayout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/profileSwipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/appLogo"
-            android:layout_width="@dimen/global_icon_size"
-            android:layout_height="@dimen/global_icon_size"
-            android:layout_marginStart="@dimen/global_margin"
-            android:layout_marginTop="@dimen/global_margin"
-            android:layout_marginEnd="@dimen/global_margin"
-            android:layout_marginBottom="@dimen/global_bottom_distance"
-            android:contentDescription="@string/appLogo"
-            android:src="@mipmap/app_icon"
-            app:layout_constraintBottom_toTopOf="@+id/removeHintTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/removePersonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/removeHintTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/global_margin"
-            android:layout_marginTop="@dimen/global_margin"
-            android:layout_marginEnd="@dimen/global_margin"
-            android:layout_marginBottom="@dimen/global_bottom_distance"
-            android:text="@string/removePersonHint"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="@dimen/menu_text_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/removePersonRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appLogo" />
+            <ImageView
+                android:id="@+id/appLogo"
+                android:layout_width="@dimen/global_icon_size"
+                android:layout_height="@dimen/global_icon_size"
+                android:layout_marginStart="@dimen/global_margin"
+                android:layout_marginTop="@dimen/global_margin"
+                android:layout_marginEnd="@dimen/global_margin"
+                android:contentDescription="@string/appLogo"
+                android:src="@mipmap/app_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/removePersonRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/global_margin"
-            android:layout_marginTop="@dimen/global_margin"
-            android:layout_marginEnd="@dimen/global_margin"
-            android:layout_marginBottom="@dimen/global_bottom_distance"
-            app:layout_constraintBottom_toTopOf="@+id/removePersonErrorTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/removeHintTextView" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profileContentLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appLogo">
 
-        <TextView
-            android:id="@+id/removePersonErrorTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/global_margin"
-            android:layout_marginTop="@dimen/global_margin"
-            android:layout_marginEnd="@dimen/global_margin"
-            android:layout_marginBottom="@dimen/global_bottom_distance"
-            app:layout_constraintBottom_toTopOf="@+id/saveButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/removePersonRecyclerView" />
+                <TextView
+                    android:id="@+id/removePersonErrorTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_bottom_distance"
+                    android:textColor="@color/error_message"
+                    app:layout_constraintBottom_toTopOf="@id/removeHintTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/saveButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/global_margin"
-            android:layout_marginTop="@dimen/global_margin"
-            android:layout_marginEnd="@dimen/global_margin"
-            android:layout_marginBottom="@dimen/global_margin"
-            android:text="@string/saveButton"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/removePersonErrorTextView" />
+                <TextView
+                    android:id="@+id/removeHintTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_bottom_distance"
+                    android:text="@string/removePersonHint"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/menu_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/removePersonRecyclerView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/removePersonErrorTextView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/removePersonRecyclerView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_bottom_distance"
+                    app:layout_constraintBottom_toTopOf="@+id/saveButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/removeHintTextView" />
+
+                <Button
+                    android:id="@+id/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/global_margin"
+                    android:layout_marginTop="@dimen/global_margin"
+                    android:layout_marginEnd="@dimen/global_margin"
+                    android:layout_marginBottom="@dimen/global_margin"
+                    android:text="@string/saveButton"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/removePersonRecyclerView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

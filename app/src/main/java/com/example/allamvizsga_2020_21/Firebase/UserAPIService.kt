@@ -11,12 +11,12 @@ object UserAPIService {
 
     fun writeUserData(userData: UserData, successListener: SuccessListener) {
         val userPath = "user/" + FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseWriteRead.writeToDatabase(userPath, userData, successListener)
+        FirebaseOperations.writeToDatabase(userPath, userData, successListener)
     }
 
     fun readUserData(currentUserListener: CurrentUserListener) {
         val userPath = "user/" + FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseWriteRead.readFromDatabase(userPath, object : DataSnapshotListener {
+        FirebaseOperations.readFromDatabase(userPath, object : DataSnapshotListener {
             override fun onDataSnapshotReady(dataSnapshot: DataSnapshot) {
                 val userData = dataSnapshot.getValue(UserData::class.java)!!
                 currentUserListener.onSuccess(userData)
