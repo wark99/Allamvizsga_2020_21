@@ -1,4 +1,4 @@
-package com.example.allamvizsga_2020_21.main.Menu.Profile
+package com.example.allamvizsga_2020_21.main.Menu.Profile.removePerson
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.allamvizsga_2020_21.Firebase.Data.ProfileData
 import com.example.allamvizsga_2020_21.R
 
@@ -38,8 +39,8 @@ class ProfileRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        //Glide.with(viewHolder.personImage).load(dataset[position].pictureURL).into(viewHolder.personImage)
-        viewHolder.personImage.setImageURI(dataset[position].pictureURL)
+        Glide.with(viewHolder.personImage).load(dataset[position].pictureURL)
+            .into(viewHolder.personImage)
         viewHolder.personName.text = dataset[position].personName
     }
 

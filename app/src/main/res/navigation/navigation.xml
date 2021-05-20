@@ -99,5 +99,22 @@
         android:id="@+id/profileFragment"
         android:name="com.example.allamvizsga_2020_21.main.Menu.Profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/to_addPersonFragment_from_profileFragment"
+            app:destination="@id/addPersonFragment" />
+        <action
+            android:id="@+id/to_removePersonFragment_from_profileFragment_from_profile"
+            app:destination="@id/removePersonFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPersonFragment"
+        android:name="com.example.allamvizsga_2020_21.main.Menu.Profile.addPerson.AddPersonFragment"
+        android:label="fragment_add_person"
+        tools:layout="@layout/fragment_add_person" />
+    <fragment
+        android:id="@+id/removePersonFragment"
+        android:name="com.example.allamvizsga_2020_21.main.Menu.Profile.removePerson.RemovePersonFragment"
+        android:label="fragment_remove_person"
+        tools:layout="@layout/fragment_remove_person" />
 </navigation>

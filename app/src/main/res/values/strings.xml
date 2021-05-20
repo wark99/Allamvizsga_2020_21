@@ -46,25 +46,38 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     <string name="profile_title">Profile</string>
     <string name="exit_button">Log Out</string>
     <string name="exit_title">Log Out</string>
+    <string name="arming_button">Activate system</string>
 
     //Camera Selection Screen
     <string name="select_camera_text">Select camera: </string>
+    <string name="network_error">Network Error</string>
+    <string name="refresh_hint">Turn on network connection and swipe down to refresh</string>
     //list_item_select_camera
     <string name="placeholder">Placeholder</string>
 
     //History
     <string name="history_header_text">Time | Camera Name | Severity</string>
+    <string name="history_error">Network Error</string>
     //list_item_history
     <string name="history_list_item" />
 
-    //Profile
-    <string name="added_people">Added people</string>
-    <string name="remove_hint">To remove people from trusted list hold your finger on his picture</string>
-    <string name="select_picture_button">Select Picture</string>
-    <string name="selected_image">Selected image</string>
-    <string name="name_input_edit_text">Name</string>
-    <string name="upload_button">Upload Image</string>
+    //Profile Menu
+    <string name="add_person">Add Person</string>
+    <string name="remove_person">Remove Person</string>
+    <string name="add_camera">Add Camera</string>
+
+    //Add person
+    <string name="selectImageButton">Choose Image From Galley</string>
+    <string name="selectedPerson">Selected Person Name</string>
+    <string name="uploadButton">Upload</string>
+
+    //Remove person
+    <string name="removePersonHint">To remove someone from list hold your finger on his picture</string>
+    <string name="saveButton">Save changes</string>
+
     //list_ite_profile
     <string name="profile_picture">picture</string>
-    <string name="profile_name"/>
+    <string name="profile_name" />
+
+
 </resources>

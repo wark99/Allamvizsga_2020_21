@@ -12,11 +12,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.allamvizsga_2020_21.Firebase.LoadingSwitch
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
 
-class LoginFragment : Fragment(), LoginContract.View, LoadingSwitch {
+class LoginFragment : Fragment(), LoginContract.View {
 
     private val presenter: LoginContract.Presenter = LoginPresenter(this)
 
@@ -60,7 +60,7 @@ class LoginFragment : Fragment(), LoginContract.View, LoadingSwitch {
 
         signInButton.setOnClickListener {
             Dispatchers.Main.run {
-                showLoading()
+                LoadingSwitch().showLoading(currentLayout, loadingLayout)
             }
 
             Dispatchers.IO.run {
@@ -86,21 +86,11 @@ class LoginFragment : Fragment(), LoginContract.View, LoadingSwitch {
 
     override fun error(errorMessage: String) {
         error.text = errorMessage
-        stopLoading()
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
     }
 
     override fun verified() {
         navController.navigate(R.id.to_main_form_login)
-        stopLoading()
-    }
-
-    override fun showLoading() {
-        currentLayout.visibility = View.INVISIBLE
-        loadingLayout.visibility = View.VISIBLE
-    }
-
-    override fun stopLoading() {
-        loadingLayout.visibility = View.INVISIBLE
-        currentLayout.visibility = View.VISIBLE
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
     }
 }

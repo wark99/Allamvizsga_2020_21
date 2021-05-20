@@ -4,17 +4,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.allamvizsga_2020_21.R
+import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
+import com.example.allamvizsga_2020_21.Utils.LoadingSwitch
+import com.example.allamvizsga_2020_21.mvvm.VideoViewModel
+import kotlinx.coroutines.Dispatchers
 
 
-class SelectCameraFragment : Fragment(), CameraSelectionRecyclerViewAdapter.OnItemClickListener {
+class SelectCameraFragment : Fragment(), SelectCameraContract.View,
+    CameraSelectionRecyclerViewAdapter.OnItemClickListener {
+
+    private val presenter: SelectCameraContract.Presenter = SelectCameraPresenter(this)
+    private lateinit var viewModel: VideoViewModel
+
+    private lateinit var currentLayout: ConstraintLayout
+    private lateinit var loadingLayout: ConstraintLayout
+
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+
+    private lateinit var cameraContentLayout: ConstraintLayout
+    private lateinit var cameraErrorLayout: ConstraintLayout
 
     private lateinit var navController: NavController
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var dataSet: ArrayList<String>
+    private lateinit var adapter: CameraSelectionRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,23 +47,71 @@ class SelectCameraFragment : Fragment(), CameraSelectionRecyclerViewAdapter.OnIt
         return inflater.inflate(R.layout.fragment_select_camera, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = activity?.run {
+            ViewModelProviders.of(this).get(VideoViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
+    }
+
     override fun onResume() {
         super.onResume()
 
-        val dataSet = arrayListOf<String>()
-        dataSet.add("https://images.unsplash.com/photo-1550355291-bbee04a92027?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=676&q=80")
-        dataSet.add("https://images.unsplash.com/photo-1549399542-7e3f8b79c341?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=634&q=80")
-        dataSet.add("https://firebasestorage.googleapis.com/v0/b/allamvizsga-b617a.appspot.com/o/Cat%20pushed%20dumpster.mp4?alt=media&token=973683a3-283e-4b40-8e57-cf90e933924e")
+        navController = findNavController()
 
-        val adapter = CameraSelectionRecyclerViewAdapter(dataSet, this)
-        val recyclerView = requireActivity().findViewById<RecyclerView>(R.id.cameraListRecyclerView)
+        currentLayout = requireActivity().findViewById(R.id.cameraSelectionLayout)
+        loadingLayout = requireActivity().findViewById(R.id.cameraSelectionLoadingLayout)
+
+        swipeRefreshLayout = requireActivity().findViewById(R.id.cameraSwipeLayout)
+
+        cameraContentLayout = requireActivity().findViewById(R.id.cameraContentLayout)
+        cameraErrorLayout = requireActivity().findViewById(R.id.cameraErrorLayout)
+        LoadingSwitch().showLoading(cameraContentLayout, cameraErrorLayout)
+
+        recyclerView = requireActivity().findViewById(R.id.cameraListRecyclerView)
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+
+        loadMainLayout()
+
+        swipeRefreshLayout.setOnRefreshListener {
+            loadMainLayout()
+        }
+    }
+
+    private fun loadMainLayout() {
+        if (ConnectionChecker(requireContext()).isConnected()) {
+            Dispatchers.Main.run {
+                LoadingSwitch().showLoading(currentLayout, loadingLayout)
+            }
+
+            Dispatchers.IO.run {
+                presenter.loadCameras()
+            }
+        } else {
+            presenter.connectionError()
+        }
+    }
+
+    override fun camerasLoaded(cameraList: ArrayList<String>) {
+        dataSet = cameraList
+        adapter = CameraSelectionRecyclerViewAdapter(dataSet, this)
         recyclerView.adapter = adapter
 
-        navController = findNavController()
+        LoadingSwitch().showLoading(cameraErrorLayout, cameraContentLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun loadingError() {
+        LoadingSwitch().showLoading(cameraContentLayout, cameraErrorLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onItemClick(position: Int) {
+        viewModel.data.value = dataSet[position]
+
         navController.navigate(R.id.toLiveFromCamera)
     }
 }
