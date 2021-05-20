@@ -1,6 +1,11 @@
 package com.example.allamvizsga_2020_21.main
 
+import android.app.job.JobInfo
+import android.app.job.JobScheduler
+import android.content.ComponentName
+import android.content.Context.JOB_SCHEDULER_SERVICE
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +15,16 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.allamvizsga_2020_21.JobScheduler.NetworkJobService
 import com.example.allamvizsga_2020_21.R
 import kotlinx.coroutines.Dispatchers
+
 
 class MainFragment : Fragment(), MainContract.View {
 
     private val presenter: MainContract.Presenter = MainPresenter(this)
+
+    private val JOB_ID = 100
 
     private lateinit var camerasButton: ImageButton
     private lateinit var historyButton: ImageButton
@@ -64,6 +73,10 @@ class MainFragment : Fragment(), MainContract.View {
             }
         }
 
+        armingSwitch.setOnClickListener {
+            jobManager()
+        }
+
         currentActivity.onBackPressedDispatcher.addCallback(this) {
             currentActivity.finishAffinity()
         }
@@ -71,5 +84,34 @@ class MainFragment : Fragment(), MainContract.View {
 
     override fun onLogOut() {
         navController.navigate(R.id.to_login_from_main)
+    }
+
+    private fun jobManager() {
+        if (armingSwitch.isChecked) {
+            scheduleJob()
+        } else {
+            cancelJob()
+        }
+    }
+
+    private fun scheduleJob() {
+        val componentName = ComponentName(requireContext(), NetworkJobService::class.java)
+        val jobInfo =
+            JobInfo.Builder(JOB_ID, componentName).setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
+                .setPersisted(true).setPeriodic(60 * 1000).build()
+        val jobScheduler = requireActivity().getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+        val resultCode = jobScheduler.schedule(jobInfo)
+
+        if (resultCode == JobScheduler.RESULT_SUCCESS) {
+            Log.d("NetworkJobService", "Job scheduled")
+        } else {
+            Log.d("NetworkJobService", "Job scheduling failed")
+        }
+    }
+
+    private fun cancelJob() {
+        val jobScheduler = requireActivity().getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
+        jobScheduler.cancel(JOB_ID)
+        Log.d("NetworkJobService", "Job canceled")
     }
 }
