@@ -98,7 +98,7 @@ class MainFragment : Fragment(), MainContract.View {
         val componentName = ComponentName(requireContext(), NetworkJobService::class.java)
         val jobInfo =
             JobInfo.Builder(JOB_ID, componentName).setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
-                .setPersisted(true).setPeriodic(60 * 1000).build()
+                .setPersisted(true).setPeriodic(1000).build()
         val jobScheduler = requireActivity().getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
         val resultCode = jobScheduler.schedule(jobInfo)
 

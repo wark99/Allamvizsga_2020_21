@@ -3,6 +3,10 @@ package com.example.allamvizsga_2020_21.JobScheduler
 import android.app.job.JobParameters
 import android.app.job.JobService
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
+import java.io.OutputStream
+import java.net.Socket
+import java.util.*
 
 class NetworkJobService : JobService() {
     private var jobScheduled = false
@@ -18,17 +22,8 @@ class NetworkJobService : JobService() {
 
     private fun alarmCheck(params: JobParameters?) {
         Thread(Runnable {
-            for (i in 0..9) {
-                Log.d(TAG, "run: $i")
-                if (jobScheduled) {
-                    return@Runnable
-                }
-                try {
-                    Thread.sleep(1000)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
+            Log.d(TAG, "run")
+            client("192.168.100.100", 8080)
             Log.d(TAG, "Job finished")
             jobFinished(params, true)
         }).start()
@@ -39,5 +34,23 @@ class NetworkJobService : JobService() {
         jobScheduled = true
 
         return true
+    }
+
+    private fun client(address: String, port: Int) {
+        val connection = Socket(address, port)
+        val writer: OutputStream = connection.getOutputStream()
+        val message = "/" + FirebaseAuth.getInstance().currentUser!!.uid
+        writer.write(message.toByteArray())
+
+        val reader = Scanner(connection.getInputStream())
+        var input = ""
+        while (reader.hasNext()) {
+            input +=" "+reader.next()
+            Log.d("NetworkJobService", "Message from server: " + input)
+        }
+
+        reader.close()
+        writer.close()
+        connection.close()
     }
 }
