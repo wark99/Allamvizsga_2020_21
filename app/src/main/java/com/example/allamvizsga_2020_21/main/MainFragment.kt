@@ -4,6 +4,8 @@ import android.app.job.JobInfo
 import android.app.job.JobScheduler
 import android.content.ComponentName
 import android.content.Context.JOB_SCHEDULER_SERVICE
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -34,6 +36,8 @@ class MainFragment : Fragment(), MainContract.View {
 
     private lateinit var navController: NavController
 
+    private lateinit var sharedPreferences: SharedPreferences
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,11 +51,16 @@ class MainFragment : Fragment(), MainContract.View {
 
         val currentActivity = requireActivity()
 
+        sharedPreferences =
+            currentActivity.getSharedPreferences("com.example.allamvizsga_2020_21", MODE_PRIVATE)
+
         camerasButton = currentActivity.findViewById(R.id.CameraImageButton)
         historyButton = currentActivity.findViewById(R.id.HistoryImageButton)
         profileButton = currentActivity.findViewById(R.id.ProfileImageButton)
         logOutButton = currentActivity.findViewById(R.id.LogOutImageButton)
         armingSwitch = currentActivity.findViewById(R.id.armingSwitch)
+
+        armingSwitch.isChecked = sharedPreferences.getBoolean("service_status", false)
 
         navController = findNavController()
 
@@ -87,6 +96,7 @@ class MainFragment : Fragment(), MainContract.View {
     }
 
     private fun jobManager() {
+        sharedPreferences.edit().putBoolean("service_status", armingSwitch.isChecked).apply()
         if (armingSwitch.isChecked) {
             scheduleJob()
         } else {
@@ -104,6 +114,11 @@ class MainFragment : Fragment(), MainContract.View {
 
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d("NetworkJobService", "Job scheduled")
+
+            /*Thread(Runnable {
+                client("192.168.100.100", 8080)
+            }).start()*/
+
         } else {
             Log.d("NetworkJobService", "Job scheduling failed")
         }
@@ -114,4 +129,32 @@ class MainFragment : Fragment(), MainContract.View {
         jobScheduler.cancel(JOB_ID)
         Log.d("NetworkJobService", "Job canceled")
     }
+
+    /*private fun client(address: String, port: Int) {
+        val connection = Socket(address, port)
+        val writer: OutputStream = connection.getOutputStream()
+        val message = "/" + FirebaseAuth.getInstance().currentUser!!.uid
+        writer.write(message.toByteArray())
+
+        val reader = Scanner(connection.getInputStream())
+        var input = ""
+
+        while (reader.hasNextLine()) {
+            input += reader.nextLine()
+            Log.d("NetworkJobService", "Message from server: " + input)
+
+            if (input == "ALERT") {
+                val alert = AlertNotification()
+                alert.createNotificationChannel(requireContext().applicationContext)
+                alert.sendNotification(requireContext().applicationContext)
+                Log.d("NetworkJobService", "Notify")
+            }
+
+            input = ""
+        }
+
+        reader.close()
+        writer.close()
+        connection.close()
+    }*/
 }

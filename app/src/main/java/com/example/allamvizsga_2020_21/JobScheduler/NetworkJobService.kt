@@ -3,6 +3,7 @@ package com.example.allamvizsga_2020_21.JobScheduler
 import android.app.job.JobParameters
 import android.app.job.JobService
 import android.util.Log
+import com.example.allamvizsga_2020_21.AlertNotification
 import com.google.firebase.auth.FirebaseAuth
 import java.io.OutputStream
 import java.net.Socket
@@ -44,9 +45,19 @@ class NetworkJobService : JobService() {
 
         val reader = Scanner(connection.getInputStream())
         var input = ""
-        while (reader.hasNext()) {
-            input +=" "+reader.next()
+
+        while (reader.hasNextLine()) {
+            input += reader.nextLine()
             Log.d("NetworkJobService", "Message from server: " + input)
+
+            if (input == "ALERT") {
+                val alert = AlertNotification()
+                alert.createNotificationChannel(applicationContext)
+                alert.sendNotification(applicationContext)
+                Log.d("NetworkJobService", "Notify")
+            }
+
+            input = ""
         }
 
         reader.close()
