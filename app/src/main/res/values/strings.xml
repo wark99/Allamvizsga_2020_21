@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SecuroServ</string>
+    <string name="app_name">Premsec</string>
 
     //Splash screen
     <string name="appLogo">App Logo</string>
