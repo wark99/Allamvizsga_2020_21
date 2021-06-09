@@ -27,6 +27,7 @@ class NetworkJobService : JobService() {
             client("192.168.100.100", 8080)
             Log.d(TAG, "Job finished")
             jobFinished(params, true)
+            Log.d("NetworkJobService", "Job scheduled")
         }).start()
     }
 
@@ -55,6 +56,7 @@ class NetworkJobService : JobService() {
                 alert.createNotificationChannel(applicationContext)
                 alert.sendNotification(applicationContext)
                 Log.d("NetworkJobService", "Notify")
+                break
             }
 
             input = ""

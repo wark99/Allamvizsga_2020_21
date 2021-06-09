@@ -15,7 +15,7 @@ class AlertNotification() {
     private val notificationID = 101
 
     fun createNotificationChannel(requiredContext: Context) {
-        val name = "PromoSec"
+        val name = "Promosec"
         val descriptionText = "Alert"
         val importance = NotificationManager.IMPORTANCE_HIGH
         val channel = NotificationChannel(channelID, name, importance).apply {
@@ -40,7 +40,7 @@ class AlertNotification() {
 
         val builder = NotificationCompat.Builder(requiredContext, channelID)
             .setSmallIcon(R.mipmap.app_icon)
-            .setContentTitle("PromoSec")
+            .setContentTitle("Promosec")
             .setContentText("Alert")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)

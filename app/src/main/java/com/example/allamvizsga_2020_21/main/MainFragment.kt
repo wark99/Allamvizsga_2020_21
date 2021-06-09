@@ -17,9 +17,14 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.allamvizsga_2020_21.AlertNotification
 import com.example.allamvizsga_2020_21.JobScheduler.NetworkJobService
 import com.example.allamvizsga_2020_21.R
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
+import java.io.OutputStream
+import java.net.Socket
+import java.util.*
 
 
 class MainFragment : Fragment(), MainContract.View {
@@ -115,9 +120,9 @@ class MainFragment : Fragment(), MainContract.View {
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d("NetworkJobService", "Job scheduled")
 
-            /*Thread(Runnable {
+            Thread(Runnable {
                 client("192.168.100.100", 8080)
-            }).start()*/
+            }).start()
 
         } else {
             Log.d("NetworkJobService", "Job scheduling failed")
@@ -130,7 +135,7 @@ class MainFragment : Fragment(), MainContract.View {
         Log.d("NetworkJobService", "Job canceled")
     }
 
-    /*private fun client(address: String, port: Int) {
+    private fun client(address: String, port: Int) {
         val connection = Socket(address, port)
         val writer: OutputStream = connection.getOutputStream()
         val message = "/" + FirebaseAuth.getInstance().currentUser!!.uid
@@ -156,5 +161,5 @@ class MainFragment : Fragment(), MainContract.View {
         reader.close()
         writer.close()
         connection.close()
-    }*/
+    }
 }
