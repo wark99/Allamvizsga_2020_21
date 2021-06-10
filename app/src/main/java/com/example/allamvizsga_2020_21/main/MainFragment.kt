@@ -82,6 +82,8 @@ class MainFragment : Fragment(), MainContract.View {
         }
 
         logOutButton.setOnClickListener {
+            sharedPreferences.edit().putBoolean("service_status", false).apply()
+            cancelJob()
             Dispatchers.IO.run {
                 presenter.logOut()
             }
@@ -120,9 +122,9 @@ class MainFragment : Fragment(), MainContract.View {
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d("NetworkJobService", "Job scheduled")
 
-            Thread(Runnable {
+            /*Thread(Runnable {
                 client("192.168.100.100", 8080)
-            }).start()
+            }).start()*/
 
         } else {
             Log.d("NetworkJobService", "Job scheduling failed")
