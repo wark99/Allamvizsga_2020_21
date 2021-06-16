@@ -81,4 +81,34 @@
         app:layout_constraintStart_toEndOf="@+id/addPersonTextView"
         app:layout_constraintTop_toBottomOf="@+id/removePersonImageButton" />
 
+    <ImageButton
+        android:id="@+id/pairCameraImageButton"
+        android:layout_width="@dimen/global_icon_size"
+        android:layout_height="@dimen/global_icon_size"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_margin"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_bottom_distance"
+        android:background="@color/blue"
+        android:contentDescription="@string/pair_camera"
+        android:src="@drawable/add_camera"
+        app:layout_constraintBottom_toTopOf="@+id/pairCameraTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPersonTextView" />
+
+    <TextView
+        android:id="@+id/pairCameraTextView"
+        android:layout_width="@dimen/global_icon_size"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:text="@string/pair_camera"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pairCameraImageButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

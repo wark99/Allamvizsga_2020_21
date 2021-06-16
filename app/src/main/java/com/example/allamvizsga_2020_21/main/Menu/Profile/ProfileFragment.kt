@@ -16,6 +16,7 @@ class ProfileFragment : Fragment() {
 
     private lateinit var addPersonButton: ImageButton
     private lateinit var removePersonButton: ImageButton
+    private lateinit var pairCameraButton: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,12 +33,18 @@ class ProfileFragment : Fragment() {
 
         addPersonButton = requireActivity().findViewById(R.id.addPersonImageButton)
         removePersonButton = requireActivity().findViewById(R.id.removePersonImageButton)
+        pairCameraButton = requireActivity().findViewById(R.id.pairCameraImageButton)
 
         addPersonButton.setOnClickListener {
             navController.navigate(R.id.to_addPersonFragment_from_profileFragment)
+
         }
         removePersonButton.setOnClickListener {
-            navController.navigate(R.id.to_removePersonFragment_from_profileFragment_from_profile)
+            navController.navigate(R.id.to_removePersonFragment_from_profileFragment)
+        }
+
+        pairCameraButton.setOnClickListener {
+            navController.navigate(R.id.to_pairCameraFragment_from_profileFragment)
         }
     }
 }

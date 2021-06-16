@@ -64,7 +64,7 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     //Profile Menu
     <string name="add_person">Add Person</string>
     <string name="remove_person">Remove Person</string>
-    <string name="add_camera">Add Camera</string>
+    <string name="pair_camera">Pair Camera</string>
 
     //Add person
     <string name="selectImageButton">Choose Image From Galley</string>
@@ -75,9 +75,17 @@ Cras euismod sem non vulputate venenatis. Morbi fermentum dignissim sapien, nec 
     <string name="removePersonHint">To remove someone from list hold your finger on his picture</string>
     <string name="saveButton">Save changes</string>
 
-    //list_ite_profile
+    //list_item_profile
     <string name="profile_picture">picture</string>
     <string name="profile_name" />
 
+    //Pair Camera
+    <string name="pair_camera_error">Network Error</string>
+
+    //list_item_pair_camera
+    <string name="pair_camera_placeholder">pair camera placeholder</string>
+    <string name="camera_name_placeholder">camera name</string>
+    <string name="pair_camera_button">Connect</string>
+    <string name="disconnect_camera_button">Disconnect</string>
 
 </resources>

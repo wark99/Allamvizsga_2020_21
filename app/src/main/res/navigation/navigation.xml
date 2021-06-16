@@ -104,8 +104,11 @@
             android:id="@+id/to_addPersonFragment_from_profileFragment"
             app:destination="@id/addPersonFragment" />
         <action
-            android:id="@+id/to_removePersonFragment_from_profileFragment_from_profile"
+            android:id="@+id/to_removePersonFragment_from_profileFragment"
             app:destination="@id/removePersonFragment" />
+        <action
+            android:id="@+id/to_pairCameraFragment_from_profileFragment"
+            app:destination="@id/pairCameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPersonFragment"
@@ -117,4 +120,9 @@
         android:name="com.example.allamvizsga_2020_21.main.Menu.Profile.removePerson.RemovePersonFragment"
         android:label="fragment_remove_person"
         tools:layout="@layout/fragment_remove_person" />
+    <fragment
+        android:id="@+id/pairCameraFragment"
+        android:name="com.example.allamvizsga_2020_21.main.Menu.Profile.pairCamera.PairCameraFragment"
+        android:label="fragment_pair_camera"
+        tools:layout="@layout/fragment_pair_camera" />
 </navigation>
