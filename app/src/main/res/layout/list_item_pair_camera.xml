@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/cameraImageView"
+        android:layout_width="@dimen/pair_camera_size_width"
+        android:layout_height="@dimen/pair_camera_size_height"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/pair_camera_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/pairCameraNameTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/add_camera" />
+
+    <TextView
+        android:id="@+id/pairCameraNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_margin"
+        android:text="@string/camera_name_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraImageView" />
+
+    <Button
+        android:id="@+id/pairCameraAddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_bottom_distance"
+        android:text="@string/pair_camera_button"
+        app:layout_constraintBottom_toTopOf="@+id/pairCameraRemoveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cameraImageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/pairCameraRemoveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/global_margin"
+        android:layout_marginTop="@dimen/global_top_distance"
+        android:layout_marginEnd="@dimen/global_margin"
+        android:layout_marginBottom="@dimen/global_bottom_distance"
+        android:text="@string/disconnect_camera_button"
+        app:layout_constraintBottom_toTopOf="@+id/pairCameraNameTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cameraImageView"
+        app:layout_constraintTop_toBottomOf="@+id/pairCameraAddButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

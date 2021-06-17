@@ -43,7 +43,7 @@ object ProfileAPIService {
             val imagePath=FirebaseAuth.getInstance().currentUser!!.uid+"/"+person.personName
             FirebaseOperations.removeFromStorage(imagePath, object:SuccessListener{
                 override fun onSuccess() {
-                    FirebaseOperations.removeFromDatabase(path, person, successListener)
+                    FirebaseOperations.removeProfileFromDatabase(path, person, successListener)
                 }
 
                 override fun onFail(exception: Exception) {
