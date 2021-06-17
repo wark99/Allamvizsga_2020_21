@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -30,6 +31,9 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     private lateinit var pairCameraContentLayout: ConstraintLayout
     private lateinit var pairCameraErrorLayout: ConstraintLayout
 
+    private lateinit var feedbackTextView: TextView
+    private lateinit var pairCameraError: TextView
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PairCameraRecyclerViewAdapter
     private lateinit var dataSet: ArrayList<PairCameraData>
@@ -54,6 +58,8 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
         pairCameraErrorLayout = requireActivity().findViewById(R.id.pairCameraErrorLayout)
         LoadingSwitch().showLoading(pairCameraContentLayout, pairCameraErrorLayout)
 
+        feedbackTextView = requireActivity().findViewById(R.id.feedbackTextView)
+        pairCameraError = requireActivity().findViewById(R.id.pairCameraErrorTextView)
         recyclerView = requireActivity().findViewById(R.id.pairCameraRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -79,6 +85,7 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     }
 
     override fun loadingError() {
+        pairCameraError.text = "Network Error"
         LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
@@ -95,17 +102,34 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     }
 
     override fun connectionSuccess() {
+        feedbackTextView.text="Camera connected"
         LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
-        Toast.makeText(requireContext(), "Camera connected", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun disconnectionSuccess() {
+        feedbackTextView.text="Camera disconnected"
+        LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
+        Toast.makeText(requireContext(), "Camera disconnected", Toast.LENGTH_SHORT).show()
     }
 
     override fun connectionFail(errorMessage: String) {
+        feedbackTextView.text=""
+        pairCameraError.text = errorMessage
         LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
-        Toast.makeText(requireContext(), "Connection Failed", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun disconnectionFail(errorMessage: String) {
+        feedbackTextView.text=""
+        pairCameraError.text = errorMessage
+        LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
     }
 
     override fun onConnectClick(position: Int) {

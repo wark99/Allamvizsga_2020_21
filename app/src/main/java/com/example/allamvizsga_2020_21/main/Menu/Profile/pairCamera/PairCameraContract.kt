@@ -10,7 +10,9 @@ interface PairCameraContract {
         fun loadingError()
         fun cameraLoaded(pairCameraData: ArrayList<PairCameraData>)
         fun connectionSuccess()
+        fun disconnectionSuccess()
         fun connectionFail(errorMessage: String)
+        fun disconnectionFail(errorMessage: String)
     }
 
     abstract class Presenter(view: View) : BasePresenter<View>(view) {

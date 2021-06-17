@@ -58,7 +58,11 @@ object FirebaseOperations {
         }
     }
 
-    fun removeFromDatabase(path: String, person: ProfileData, successListener: SuccessListener) {
+    fun removeProfileFromDatabase(
+        path: String,
+        person: ProfileData,
+        successListener: SuccessListener
+    ) {
         databaseReference.child(path).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (data in snapshot.children) {
@@ -83,6 +87,14 @@ object FirebaseOperations {
             successListener.onSuccess()
         }.addOnFailureListener {
             successListener.onFail(Exception("Failed to remove!"))
+        }
+    }
+
+    fun removeFromDatabase(path: String, successListener: SuccessListener) {
+        databaseReference.child(path).removeValue().addOnSuccessListener {
+            successListener.onSuccess()
+        }.addOnFailureListener { exception ->
+            successListener.onFail(exception)
         }
     }
 }

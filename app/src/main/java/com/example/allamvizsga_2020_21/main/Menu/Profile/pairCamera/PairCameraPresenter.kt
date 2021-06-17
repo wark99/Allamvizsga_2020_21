@@ -23,7 +23,7 @@ class PairCameraPresenter(view: PairCameraContract.View) : PairCameraContract.Pr
     }
 
     override fun connectCamera(pairCameraData: PairCameraData) {
-        CameraAPIService.connectCamera(pairCameraData.cameraPicture, object : SuccessListener {
+        CameraAPIService.connectCamera(pairCameraData, object : SuccessListener {
             override fun onSuccess() {
                 view!!.connectionSuccess()
             }
@@ -37,11 +37,11 @@ class PairCameraPresenter(view: PairCameraContract.View) : PairCameraContract.Pr
     override fun disconnectCamera(pairCameraData: PairCameraData) {
         CameraAPIService.disconnectCamera(pairCameraData, object : SuccessListener {
             override fun onSuccess() {
-
+                view!!.disconnectionSuccess()
             }
 
             override fun onFail(exception: Exception) {
-
+                view!!.disconnectionFail(exception.message!!)
             }
         })
     }

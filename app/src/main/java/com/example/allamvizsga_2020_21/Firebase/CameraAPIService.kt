@@ -46,9 +46,32 @@ object CameraAPIService {
         })
     }
 
-    fun connectCamera(pairCameraData: String, successListener: SuccessListener) {
-        val path = "camera/" + FirebaseAuth.getInstance().currentUser!!.uid
-        FirebaseOperations.writeToDatabaseRandomPosition(path, pairCameraData, object : SuccessListener {
+    fun connectCamera(pairCameraData: PairCameraData, successListener: SuccessListener) {
+        val path =
+            "camera/" + FirebaseAuth.getInstance().currentUser!!.uid + '/' + pairCameraData.cameraName.split(
+                '#'
+            )[1]
+        FirebaseOperations.writeToDatabase(
+            path,
+            pairCameraData.cameraPicture,
+            object : SuccessListener {
+                override fun onSuccess() {
+                    successListener.onSuccess()
+                }
+
+                override fun onFail(exception: Exception) {
+                    successListener.onFail(exception)
+                }
+
+            })
+    }
+
+    fun disconnectCamera(pairCameraData: PairCameraData, successListener: SuccessListener) {
+        val path =
+            "camera/" + FirebaseAuth.getInstance().currentUser!!.uid + '/' + pairCameraData.cameraName.split(
+                '#'
+            )[1]
+        FirebaseOperations.removeFromDatabase(path, object : SuccessListener {
             override fun onSuccess() {
                 successListener.onSuccess()
             }
@@ -56,11 +79,6 @@ object CameraAPIService {
             override fun onFail(exception: Exception) {
                 successListener.onFail(exception)
             }
-
         })
-    }
-
-    fun disconnectCamera(pairCameraData: PairCameraData, successListener: SuccessListener) {
-
     }
 }
