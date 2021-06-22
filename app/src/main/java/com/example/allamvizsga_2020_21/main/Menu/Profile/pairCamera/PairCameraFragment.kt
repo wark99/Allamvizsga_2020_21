@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.allamvizsga_2020_21.Firebase.Data.CameraSetting
 import com.example.allamvizsga_2020_21.Firebase.Data.PairCameraData
 import com.example.allamvizsga_2020_21.R
 import com.example.allamvizsga_2020_21.Utils.ConnectionChecker
@@ -32,11 +34,13 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     private lateinit var pairCameraErrorLayout: ConstraintLayout
 
     private lateinit var feedbackTextView: TextView
+    private lateinit var saveButton: Button
     private lateinit var pairCameraError: TextView
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: PairCameraRecyclerViewAdapter
-    private lateinit var dataSet: ArrayList<PairCameraData>
+    private lateinit var cameraDataSet: ArrayList<PairCameraData>
+    private lateinit var settingsDataSet: ArrayList<CameraSetting>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,16 +63,36 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
         LoadingSwitch().showLoading(pairCameraContentLayout, pairCameraErrorLayout)
 
         feedbackTextView = requireActivity().findViewById(R.id.feedbackTextView)
+        saveButton = requireActivity().findViewById(R.id.saveSettingsButton)
         pairCameraError = requireActivity().findViewById(R.id.pairCameraErrorTextView)
         recyclerView = requireActivity().findViewById(R.id.pairCameraRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         loadMainLayout()
 
+        saveButton.setOnClickListener {
+            saveChanges()
+        }
+
         swipeRefreshLayout.setOnRefreshListener {
             loadMainLayout()
         }
     }
+
+    private fun saveChanges() {
+        if (ConnectionChecker(requireContext()).isConnected()) {
+            Dispatchers.Main.run {
+                LoadingSwitch().showLoading(currentLayout, loadingLayout)
+            }
+
+            Dispatchers.IO.run {
+                presenter.saveSettings(cameraDataSet, settingsDataSet)
+            }
+        } else {
+            presenter.connectionError()
+        }
+    }
+
 
     private fun loadMainLayout() {
         if (ConnectionChecker(requireContext()).isConnected()) {
@@ -91,9 +115,13 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
         swipeRefreshLayout.isRefreshing = false
     }
 
-    override fun cameraLoaded(pairCameraData: ArrayList<PairCameraData>) {
-        dataSet = pairCameraData
-        adapter = PairCameraRecyclerViewAdapter(dataSet, this, this)
+    override fun cameraLoaded(
+        pairCameraData: ArrayList<PairCameraData>,
+        settingList: ArrayList<CameraSetting>
+    ) {
+        cameraDataSet = pairCameraData
+        settingsDataSet = settingList
+        adapter = PairCameraRecyclerViewAdapter(cameraDataSet, settingsDataSet, this, this)
         recyclerView.adapter = adapter
 
         LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
@@ -102,14 +130,14 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     }
 
     override fun connectionSuccess() {
-        feedbackTextView.text="Camera connected"
+        feedbackTextView.text = "Camera connected"
         LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
     }
 
     override fun disconnectionSuccess() {
-        feedbackTextView.text="Camera disconnected"
+        feedbackTextView.text = "Camera disconnected"
         LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
@@ -117,7 +145,7 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     }
 
     override fun connectionFail(errorMessage: String) {
-        feedbackTextView.text=""
+        feedbackTextView.text = ""
         pairCameraError.text = errorMessage
         LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
@@ -125,8 +153,23 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
     }
 
     override fun disconnectionFail(errorMessage: String) {
-        feedbackTextView.text=""
+        feedbackTextView.text = ""
         pairCameraError.text = errorMessage
+        LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onSaveSuccess() {
+        feedbackTextView.text = "Save Success"
+        LoadingSwitch().stopLoading(pairCameraErrorLayout, pairCameraContentLayout)
+        LoadingSwitch().stopLoading(loadingLayout, currentLayout)
+        swipeRefreshLayout.isRefreshing = false
+    }
+
+    override fun onSaveFail(message: String) {
+        feedbackTextView.text = ""
+        pairCameraError.text = message
         LoadingSwitch().stopLoading(pairCameraContentLayout, pairCameraErrorLayout)
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
         swipeRefreshLayout.isRefreshing = false
@@ -139,7 +182,7 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
             }
 
             Dispatchers.IO.run {
-                presenter.connectCamera(dataSet[position])
+                presenter.connectCamera(cameraDataSet[position])
             }
         } else {
             presenter.connectionError()
@@ -153,7 +196,7 @@ class PairCameraFragment : Fragment(), PairCameraContract.View,
             }
 
             Dispatchers.IO.run {
-                presenter.disconnectCamera(dataSet[position])
+                presenter.disconnectCamera(cameraDataSet[position])
             }
         } else {
             presenter.connectionError()
