@@ -26,7 +26,7 @@ class AlertNotification() {
         notificationManager.createNotificationChannel(channel)
     }
 
-    fun sendNotification(requiredContext: Context) {
+    fun sendNotification(requiredContext: Context, notificationMessage: String) {
         val intent = Intent(requiredContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
@@ -41,7 +41,7 @@ class AlertNotification() {
         val builder = NotificationCompat.Builder(requiredContext, channelID)
             .setSmallIcon(R.mipmap.app_icon)
             .setContentTitle("Promosec")
-            .setContentText("Alert")
+            .setContentText(notificationMessage)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setLargeIcon(bitmap)

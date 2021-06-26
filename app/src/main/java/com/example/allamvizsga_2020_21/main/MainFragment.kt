@@ -43,6 +43,10 @@ class MainFragment : Fragment(), MainContract.View {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var connection: Socket
+    private lateinit var writer: OutputStream
+    private lateinit var reader: Scanner
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -123,7 +127,11 @@ class MainFragment : Fragment(), MainContract.View {
             Log.d("NetworkJobService", "Job scheduled")
 
             /*Thread(Runnable {
-                client("192.168.100.100", 8080)
+                try {
+                    client("192.168.100.102", 8080)
+                } catch (e: Exception) {
+                    Log.d("NetworkJobService", "Exception")
+                }
             }).start()*/
 
         } else {
@@ -135,33 +143,57 @@ class MainFragment : Fragment(), MainContract.View {
         val jobScheduler = requireActivity().getSystemService(JOB_SCHEDULER_SERVICE) as JobScheduler
         jobScheduler.cancel(JOB_ID)
         Log.d("NetworkJobService", "Job canceled")
+
+        /*Thread(Runnable {
+            try {
+                reader.close()
+            } catch (e: Exception) {
+                Log.d("NetworkJobService", "Exception")
+            }
+
+            try {
+                writer.close()
+            } catch (e: Exception) {
+                Log.d("NetworkJobService", "Exception")
+            }
+
+            try {
+                connection.close()
+            } catch (e: Exception) {
+                Log.d("NetworkJobService", "Exception")
+            }
+        }).start()*/
     }
 
     private fun client(address: String, port: Int) {
-        val connection = Socket(address, port)
-        val writer: OutputStream = connection.getOutputStream()
+        connection = Socket(address, port)
+        writer = connection.getOutputStream()
+
         val message = "/" + FirebaseAuth.getInstance().currentUser!!.uid
-        writer.write(message.toByteArray())
+        writer.write((message.length.toString() + message).toByteArray())
 
-        val reader = Scanner(connection.getInputStream())
-        var input = ""
+        Log.d("NetworkJobService", "Message: $message")
 
+        reader = Scanner(connection.getInputStream())
         while (reader.hasNextLine()) {
-            input += reader.nextLine()
-            Log.d("NetworkJobService", "Message from server: " + input)
-
-            if (input == "ALERT") {
-                val alert = AlertNotification()
-                alert.createNotificationChannel(requireContext().applicationContext)
-                alert.sendNotification(requireContext().applicationContext)
-                Log.d("NetworkJobService", "Notify")
+            val input = reader.nextLine()
+            Log.d("NetworkJobService", input)
+            when (input) {
+                "VIOLENCE", "UNKNOWN", "FEAR", "ANGRY" -> {
+                    sendAlert(input)
+                    break
+                }
             }
-
-            input = ""
+            if (input.split(": ")[1] != FirebaseAuth.getInstance().currentUser!!.uid) {
+                break
+            }
         }
+    }
 
-        reader.close()
-        writer.close()
-        connection.close()
+    private fun sendAlert(message: String) {
+        val alert = AlertNotification()
+        alert.createNotificationChannel(requireContext().applicationContext)
+        alert.sendNotification(requireContext().applicationContext, message)
+        Log.d("NetworkJobService", "Notify")
     }
 }
