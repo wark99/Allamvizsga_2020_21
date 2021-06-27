@@ -179,8 +179,20 @@ class MainFragment : Fragment(), MainContract.View {
             val input = reader.nextLine()
             Log.d("NetworkJobService", input)
             when (input) {
-                "VIOLENCE", "UNKNOWN", "FEAR", "ANGRY" -> {
-                    sendAlert(input)
+                "VIOLENCE" -> {
+                    sendAlert("VIOLENCE DETECTED!")
+                    break
+                }
+                "UNKNOWN" -> {
+                    sendAlert("UNKNOWN PERSON DETECTED!")
+                    break
+                }
+                "FEAR" -> {
+                    sendAlert("FEAR DETECTED!")
+                    break
+                }
+                "ANGRY" -> {
+                    sendAlert("ANGER DETECTED")
                     break
                 }
             }

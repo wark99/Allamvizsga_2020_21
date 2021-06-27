@@ -75,8 +75,20 @@ class NetworkJobService : JobService() {
             val input = reader.nextLine()
             Log.d(TAG, input)
             when (input) {
-                "VIOLENCE", "UNKNOWN", "FEAR", "ANGRY" -> {
-                    sendAlert(input)
+                "VIOLENCE" -> {
+                    sendAlert("VIOLENCE DETECTED!")
+                    break
+                }
+                "UNKNOWN" -> {
+                    sendAlert("UNKNOWN PERSON DETECTED!")
+                    break
+                }
+                "FEAR" -> {
+                    sendAlert("FEAR DETECTED!")
+                    break
+                }
+                "ANGRY" -> {
+                    sendAlert("ANGER DETECTED")
                     break
                 }
             }
