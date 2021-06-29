@@ -24,7 +24,7 @@ class NetworkJobService : JobService() {
         Thread(Runnable {
             Log.d(TAG, "Job running")
             try {
-                client("192.168.100.102", 8080)
+                client("192.168.100.101", 8080)
             } catch (e: Exception) {
                 Log.d(TAG, "Client Exception")
             }
