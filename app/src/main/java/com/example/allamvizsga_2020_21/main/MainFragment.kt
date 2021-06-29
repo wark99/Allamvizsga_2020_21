@@ -126,13 +126,13 @@ class MainFragment : Fragment(), MainContract.View {
         if (resultCode == JobScheduler.RESULT_SUCCESS) {
             Log.d("NetworkJobService", "Job scheduled")
 
-            /*Thread(Runnable {
+            Thread(Runnable {
                 try {
-                    client("192.168.100.102", 8080)
+                    client("192.168.100.101", 8080)
                 } catch (e: Exception) {
                     Log.d("NetworkJobService", "Exception")
                 }
-            }).start()*/
+            }).start()
 
         } else {
             Log.d("NetworkJobService", "Job scheduling failed")
@@ -144,7 +144,7 @@ class MainFragment : Fragment(), MainContract.View {
         jobScheduler.cancel(JOB_ID)
         Log.d("NetworkJobService", "Job canceled")
 
-        /*Thread(Runnable {
+        Thread(Runnable {
             try {
                 reader.close()
             } catch (e: Exception) {
@@ -162,7 +162,7 @@ class MainFragment : Fragment(), MainContract.View {
             } catch (e: Exception) {
                 Log.d("NetworkJobService", "Exception")
             }
-        }).start()*/
+        }).start()
     }
 
     private fun client(address: String, port: Int) {

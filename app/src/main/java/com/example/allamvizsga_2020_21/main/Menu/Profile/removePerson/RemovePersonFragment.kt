@@ -1,13 +1,11 @@
 package com.example.allamvizsga_2020_21.main.Menu.Profile.removePerson
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -85,16 +83,7 @@ class RemovePersonFragment : Fragment(), RemovePersonContract.View,
     }
 
     override fun savingSuccess() {
-        val toast1 = Toast.makeText(requireContext(), "Saved!", Toast.LENGTH_LONG)
-        val toast2 = Toast.makeText(requireContext(), "Saved!", Toast.LENGTH_LONG)
-
-        toast1.setGravity(Gravity.TOP, -500, 250)
-        toast2.setGravity(Gravity.TOP, 500, 250)
-
         LoadingSwitch().stopLoading(loadingLayout, currentLayout)
-
-        toast1.show()
-        toast2.show()
     }
 
     private fun loadPersons() {
